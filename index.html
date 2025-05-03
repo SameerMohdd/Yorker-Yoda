@@ -492,8 +492,30 @@
             const team1Logo = document.getElementById('team1-logo');
             const team2Logo = document.getElementById('team2-logo');
             
-            team1Logo.innerHTML = `<img src="logo/${match.team1.replace(' ', '_')}.png.png" alt="${match.team1}">`;
-            team2Logo.innerHTML = `<img src="logo/${match.team2.replace(' ', '_')}.png.png" alt="${match.team2}">`;
+            const formatLogoFileName = (teamName) => {
+                const formattedName = teamName.replace(' ', '_');
+                return `logo/${formattedName}.png`;
+            };
+
+            const team1LogoSrc = formatLogoFileName(match.team1);
+            const team2LogoSrc = formatLogoFileName(match.team2);
+
+            team1Logo.innerHTML = `
+                <img 
+                    src="${team1LogoSrc}" 
+                    alt="${match.team1}" 
+                    onerror="this.onerror=null; this.src='https://via.placeholder.com/100?text=${encodeURIComponent(match.team1)}'"
+                    onload="console.log('Team 1 logo loaded:', '${team1LogoSrc}')"
+                >
+            `;
+            team2Logo.innerHTML = `
+                <img 
+                    src="${team2LogoSrc}" 
+                    alt="${match.team2}" 
+                    onerror="this.onerror=null; this.src='https://via.placeholder.com/100?text=${encodeURIComponent(match.team2)}'"
+                    onload="console.log('Team 2 logo loaded:', '${team2LogoSrc}')"
+                >
+            `;
             
             team1Logo.className = 'team-logo';
             team2Logo.className = 'team-logo';

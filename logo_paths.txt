@@ -1,0 +1,9 @@
+Logo Files in Repository:
+1. Islamabad_United.png
+2. Karachi_Kings.png
+3. Lahore_Qalandars.png
+4. Multan_Sultans.png
+5. Peshawar_Zalmi.png
+6. Quetta_Gladiators.png
+
+Expected Path in HTML: logo/Team_Name.png
