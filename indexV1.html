@@ -1260,15 +1260,13 @@
             let team1Wins = 0;
             let team2Wins = 0;
             
-            if (h2hData.matches && h2hData.matches.length > 0) {
-                h2hData.matches.forEach(match => {
-                    if (match.result.includes(team1) && match.result.includes("won")) {
-                        team1Wins++;
-                    } else if (match.result.includes(team2) && match.result.includes("won")) {
-                        team2Wins++;
-                    }
-                });
-            }
+            h2hData.matches.forEach(match => {
+                if (match.result.includes(team1) && match.result.includes("won")) {
+                    team1Wins++;
+                } else if (match.result.includes(team2) && match.result.includes("won")) {
+                    team2Wins++;
+                }
+            });
 
             // Get venue data
             const venueData = pslData.venues[venue] || pslData.venues["Lahore"]; // Default to Lahore if venue not found
@@ -1303,7 +1301,7 @@
                     `;
                 });
             } else {
-                recentH2HHtml = `<div class="match-result">These teams haven't played each other in PSL 2025 yet.</div>`;
+                recentH2HHtml = `<div class="match-result">No head-to-head matches in PSL 2025</div>`;
             }
             document.getElementById('recent-h2h-matches').innerHTML = recentH2HHtml;
 
@@ -1321,7 +1319,7 @@
 
             // Generate form HTML for team 1
             let team1FormHtml = '';
-            if (team1Data && team1Data.recentMatches) {
+            if (team1Data.recentMatches) {
                 team1Data.recentMatches.forEach(match => {
                     const resultClass = match.result.includes('Won') ? 'win' : match.result.includes('Lost') ? 'loss' : '';
                     const resultText = match.result.includes('Won') ? 'win' : match.result.includes('Lost') ? 'loss' : '';
@@ -1336,7 +1334,7 @@
 
             // Generate form HTML for team 2
             let team2FormHtml = '';
-            if (team2Data && team2Data.recentMatches) {
+            if (team2Data.recentMatches) {
                 team2Data.recentMatches.forEach(match => {
                     const resultClass = match.result.includes('Won') ? 'win' : match.result.includes('Lost') ? 'loss' : '';
                     const resultText = match.result.includes('Won') ? 'win' : match.result.includes('Lost') ? 'loss' : '';
