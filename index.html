@@ -163,6 +163,11 @@
             border-radius: 12px;
             border: 1px solid #B27F35;
         }
+        
+        #head-to-head {
+            font-weight: bold;
+            color: #2B6735;
+        }
         .team-logos {
             display: flex;
             justify-content: space-around;
@@ -341,6 +346,13 @@
             border-radius: 10px;
         }
         
+        #head-to-head h4 {
+            color: #2B6735;
+            border-bottom: 2px solid #B27F35;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
         .h2h-stat {
             text-align: center;
         }
@@ -503,7 +515,6 @@
             <div class="tabs-container">
                 <div class="tabs">
                     <button class="tab-button active" data-tab="key-factors">Key Factors</button>
-                    <button class="tab-button" data-tab="head-to-head">Head to Head</button>
                     <button class="tab-button" data-tab="venue-analysis">Venue Analysis</button>
                     <button class="tab-button" data-tab="current-form">Current Form</button>
                 </div>
@@ -537,29 +548,6 @@
                                 <td id="key-players-status"></td>
                             </tr>
                         </table>
-                    </div>
-                </div>
-                
-                <div class="tab-content" id="head-to-head">
-                    <div class="h2h-stats">
-                        <div class="h2h-overview">
-                            <div class="h2h-stat">
-                                <span class="h2h-number" id="total-matches">0</span>
-                                <span class="h2h-label">Total Matches</span>
-                            </div>
-                            <div class="h2h-stat team1-stat">
-                                <span class="h2h-number" id="team1-wins">0</span>
-                                <span class="h2h-label">Team 1 Wins</span>
-                            </div>
-                            <div class="h2h-stat team2-stat">
-                                <span class="h2h-number" id="team2-wins">0</span>
-                                <span class="h2h-label">Team 2 Wins</span>
-                            </div>
-                        </div>
-                        <div class="recent-matches">
-                            <h4>PSL 2025 Head-to-Head</h4>
-                            <div id="recent-h2h-matches"></div>
-                        </div>
                     </div>
                 </div>
                 
@@ -662,96 +650,84 @@
                 team2: "Quetta Gladiators",
                 date: "2025-05-03",
                 time: "8:00 PM",
-                venue: "Lahore",
-                headToHead: "Match 23: Third encounter this season"
+                venue: "Lahore"
             },
             "Match24": {
                 team1: "Lahore Qalandars",
                 team2: "Karachi Kings",
                 date: "2025-05-04",
                 time: "8:00 PM",
-                venue: "Lahore",
-                headToHead: "Match 24: Key match for playoff race"
+                venue: "Lahore"
             },
             "Match25": {
                 team1: "Multan Sultans",
                 team2: "Peshawar Zalmi",
                 date: "2025-05-05",
                 time: "8:00 PM",
-                venue: "Multan",
-                headToHead: "Match 25: Third encounter (Previous: PZ won by 120 runs)"
+                venue: "Multan"
             },
             "Match26": {
                 team1: "Islamabad United",
                 team2: "Quetta Gladiators",
                 date: "2025-05-06",
                 time: "8:00 PM",
-                venue: "Rawalpindi",
-                headToHead: "Match 26: Fourth meeting this season"
+                venue: "Rawalpindi"
             },
             "Match27": {
                 team1: "Peshawar Zalmi",
                 team2: "Karachi Kings",
                 date: "2025-05-07",
                 time: "8:00 PM",
-                venue: "Rawalpindi",
-                headToHead: "Match 27: Third meeting (Previous: KK won by 2 wickets)"
+                venue: "Rawalpindi"
             },
             "Match28": {
                 team1: "Lahore Qalandars",
                 team2: "Peshawar Zalmi",
                 date: "2025-05-08",
                 time: "8:00 PM",
-                venue: "Rawalpindi",
-                headToHead: "Match 28: Third meeting (Previous: PZ won by 7 wickets)"
+                venue: "Rawalpindi"
             },
             "Match29": {
                 team1: "Multan Sultans",
                 team2: "Islamabad United",
                 date: "2025-05-09",
                 time: "8:00 PM",
-                venue: "Multan",
-                headToHead: "Match 29: Fourth meeting this season"
+                venue: "Multan"
             },
             "Match30": {
                 team1: "Karachi Kings",
                 team2: "Quetta Gladiators",
                 date: "2025-05-10",
                 time: "8:00 PM",
-                venue: "Karachi",
-                headToHead: "Match 30: Fourth meeting this season"
+                venue: "Karachi"
             },
             "Match31": {
                 team1: "Lahore Qalandars",
                 team2: "Multan Sultans",
                 date: "2025-05-11",
                 time: "3:00 PM",
-                venue: "Lahore",
-                headToHead: "Match 31: Third meeting (Previous: MS won by 33 runs)"
+                venue: "Lahore"
             },
             "Match32": {
                 team1: "Peshawar Zalmi",
                 team2: "Islamabad United",
                 date: "2025-05-11",
                 time: "8:00 PM",
-                venue: "Lahore",
-                headToHead: "Match 32: Fourth meeting this season"
+                venue: "Lahore"
             },
             "Match33": {
                 team1: "Karachi Kings",
                 team2: "Lahore Qalandars",
                 date: "2025-05-12",
                 time: "8:00 PM",
-                venue: "Lahore",
-                headToHead: "Match 33: Third meeting (Previous: LQ won by 65 runs)"
+                venue: "Lahore"
             },
             "Match34": {
                 team1: "Quetta Gladiators",
                 team2: "Multan Sultans",
                 date: "2025-05-12",
                 time: "8:00 PM",
-                venue: "Lahore",
-                headToHead: "Match 34: Third meeting (Previous: QG won by 10 wickets)"
+                venue: "Lahore"
             },
             // Playoff matches
             "Qualifier": {
@@ -759,32 +735,28 @@
                 team2: "TBD (2nd)",
                 date: "2025-05-13",
                 time: "8:00 PM",
-                venue: "Rawalpindi",
-                headToHead: "Qualifier: Top two teams battle for finals spot"
+                venue: "Rawalpindi"
             },
             "Eliminator1": {
                 team1: "TBD (3rd)",
                 team2: "TBD (4th)",
                 date: "2025-05-14",
                 time: "8:00 PM",
-                venue: "Lahore",
-                headToHead: "Eliminator 1: Do or die match"
+                venue: "Lahore"
             },
             "Eliminator2": {
                 team1: "TBD",
                 team2: "TBD",
                 date: "2025-05-16",
                 time: "8:00 PM",
-                venue: "Lahore",
-                headToHead: "Eliminator 2: Winner goes to final"
+                venue: "Lahore"
             },
             "Final": {
                 team1: "TBD",
                 team2: "TBD",
                 date: "2025-05-18",
                 time: "8:00 PM",
-                venue: "Lahore",
-                headToHead: "Final: PSL 2025 Championship"
+                venue: "Lahore"
             }
         };
 
@@ -884,7 +856,29 @@
             });
             document.getElementById('match-time').textContent = match.time;
             document.getElementById('match-venue').textContent = match.venue;
-            document.getElementById('head-to-head').textContent = match.headToHead;
+            // document.getElementById('head-to-head').textContent = match.headToHead;
+            
+            // Get overall head-to-head data (all-time)
+            const overallH2hKey = [match.team1, match.team2].sort().join('-');
+            const overallH2hData = overallHeadToHead[overallH2hKey];
+            
+            // Update head-to-head display with overall statistics
+            let h2hText = '';
+            if (overallH2hData) {
+                const team1Index = overallH2hKey.indexOf(match.team1) === 0 ? 0 : 1;
+                const team1Wins = team1Index === 0 ? overallH2hData.team1Wins : overallH2hData.team2Wins;
+                const team2Wins = team1Index === 0 ? overallH2hData.team2Wins : overallH2hData.team1Wins;
+                
+                h2hText = `Overall Head-to-Head: ${overallH2hData.matches} matches | ${match.team1} ${team1Wins} wins, ${match.team2} ${team2Wins} wins`;
+                
+                if (overallH2hData.noResult > 0) {
+                    h2hText += `, ${overallH2hData.noResult} no result`;
+                }
+            } else {
+                h2hText = 'No head-to-head data available';
+            }
+            
+            document.getElementById('head-to-head').textContent = h2hText;
 
             // Show sections
             matchDetails.style.display = 'block';
@@ -912,30 +906,41 @@
                 const match = allMatches[matchId];
                 const team1 = match.team1;
                 const team2 = match.team2;
+                const venue = match.venue;
 
-                // Calculate base probabilities (40-60% range)
-                let team1Prob = 40 + Math.random() * 20;
-                let team2Prob = 100 - team1Prob;
+                // Initialize scores
+                let team1Score = 0;
+                let team2Score = 0;
 
-                // Adjust for weather conditions
-                const weatherImpact = {
-                    'Clear': 0,
-                    'Cloudy': 5,
-                    'Light Rain': 8,
-                    'Hot and Humid': 3
-                }[weather];
+                // 1. Head-to-Head Performance (25% weight)
+                const h2hScore = calculateHeadToHeadScore(team1, team2);
+                team1Score += h2hScore.team1 * 0.25;
+                team2Score += h2hScore.team2 * 0.25;
 
-                // Randomly give weather advantage to one team
-                if (Math.random() > 0.5) {
-                    team1Prob += weatherImpact;
-                    team2Prob -= weatherImpact;
-                } else {
-                    team1Prob -= weatherImpact;
-                    team2Prob += weatherImpact;
+                // 2. Venue-Specific Analysis (20% weight)
+                const venueScore = calculateVenueScore(team1, team2, venue);
+                team1Score += venueScore.team1 * 0.20;
+                team2Score += venueScore.team2 * 0.20;
+
+                // 3. Current Tournament Form (35% weight)
+                const formScore = calculateCurrentFormScore(team1, team2);
+                team1Score += formScore.team1 * 0.35;
+                team2Score += formScore.team2 * 0.35;
+
+                // 4. Team Composition and Conditions (20% weight)
+                const conditionsScore = calculateConditionsScore(team1, team2, weather, venue);
+                team1Score += conditionsScore.team1 * 0.20;
+                team2Score += conditionsScore.team2 * 0.20;
+
+                // Normalize scores to percentages
+                const totalScore = team1Score + team2Score;
+                let team1Prob = Math.round((team1Score / totalScore) * 100);
+                let team2Prob = Math.round((team2Score / totalScore) * 100);
+
+                // Ensure total is 100%
+                if (team1Prob + team2Prob !== 100) {
+                    team2Prob = 100 - team1Prob;
                 }
-
-                team1Prob = Math.round(Math.max(35, Math.min(65, team1Prob)));
-                team2Prob = 100 - team1Prob;
 
                 const winner = team1Prob > team2Prob ? team1 : team2;
                 const keyPlayers = {
@@ -966,20 +971,25 @@
                 // Update key player
                 document.getElementById('key-player').textContent = keyPlayer;
 
-                // Update expected score based on conditions
-                const baseScore = {
-                    'Clear': '170-180',
-                    'Cloudy': '160-170',
-                    'Light Rain': '150-160',
-                    'Hot and Humid': '165-175'
+                // Update expected score based on conditions and venue
+                const venueData = pslData.venues[venue] || pslData.venues["Lahore"];
+                const avgScore = (venueData.avgFirstInnings + venueData.avgSecondInnings) / 2;
+                const weatherAdjustment = {
+                    'Clear': 0,
+                    'Cloudy': -5,
+                    'Light Rain': -15,
+                    'Hot and Humid': -5
                 }[weather];
-                document.getElementById('expected-score').textContent = baseScore;
+                
+                const expectedAvg = avgScore + weatherAdjustment;
+                const minScore = Math.round(expectedAvg - 10);
+                const maxScore = Math.round(expectedAvg + 10);
+                document.getElementById('expected-score').textContent = `${minScore}-${maxScore}`;
 
-                // Update toss impact
+                // Update toss impact based on venue data
                 document.getElementById('toss-impact').textContent = 
-                    weather === 'Light Rain' ? "Bowl first advantage due to DLS factor" :
-                    weather === 'Hot and Humid' ? "Bat first and set a target" :
-                    "Conditions favor chasing";
+                    venueData.tossDecision.includes("field") ? "Teams prefer chasing at this venue" : 
+                    "Teams prefer batting first at this venue";
 
                 // Show Yoda quote
                 const yodaQuotes = [
@@ -995,6 +1005,150 @@
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('prediction-result').style.display = 'block';
             }, 2000);
+        }
+
+        // Calculate head-to-head score
+        function calculateHeadToHeadScore(team1, team2) {
+            const overallH2hKey = [team1, team2].sort().join('-');
+            const overallH2hData = overallHeadToHead[overallH2hKey];
+            
+            // PSL 2025 head-to-head
+            const h2hKey = [team1, team2].sort().join('-');
+            const h2hData = pslData.headToHead[h2hKey] || { total: 0, matches: [] };
+            
+            let team1Score = 50; // Base score
+            let team2Score = 50; // Base score
+            
+            // Overall historical head-to-head (60% of h2h score)
+            if (overallH2hData) {
+                const team1Index = overallH2hKey.indexOf(team1) === 0 ? 0 : 1;
+                const team1Wins = team1Index === 0 ? overallH2hData.team1Wins : overallH2hData.team2Wins;
+                const team2Wins = team1Index === 0 ? overallH2hData.team2Wins : overallH2hData.team1Wins;
+                
+                if (overallH2hData.matches > 0) {
+                    team1Score = (team1Wins / overallH2hData.matches) * 60;
+                    team2Score = (team2Wins / overallH2hData.matches) * 60;
+                }
+            }
+            
+            // PSL 2025 head-to-head (40% of h2h score)
+            if (h2hData.total > 0) {
+                let team1PSLWins = 0;
+                let team2PSLWins = 0;
+                
+                h2hData.matches.forEach(match => {
+                    if (match.result.includes(team1) && match.result.includes("won")) {
+                        team1PSLWins++;
+                    } else if (match.result.includes(team2) && match.result.includes("won")) {
+                        team2PSLWins++;
+                    }
+                });
+                
+                team1Score += (team1PSLWins / h2hData.total) * 40;
+                team2Score += (team2PSLWins / h2hData.total) * 40;
+            }
+            
+            return { team1: team1Score, team2: team2Score };
+        }
+
+        // Calculate venue-specific score
+        function calculateVenueScore(team1, team2, venue) {
+            const venueData = pslData.venues[venue] || pslData.venues["Lahore"];
+            let team1Score = 50;
+            let team2Score = 50;
+            
+            // Toss advantage (50% of venue score)
+            const tossAdvantage = parseInt(venueData.winningToss) || 50;
+            team1Score = tossAdvantage;
+            team2Score = tossAdvantage;
+            
+            // Teams' previous performances at venue (50% of venue score)
+            // This would require more specific venue data, so using a simplified approach
+            const team1Data = pslData.teams[team1];
+            const team2Data = pslData.teams[team2];
+            
+            team1Score += (team1Data.wins / team1Data.matches) * 50;
+            team2Score += (team2Data.wins / team2Data.matches) * 50;
+            
+            return { team1: team1Score, team2: team2Score };
+        }
+
+        // Calculate current form score
+        function calculateCurrentFormScore(team1, team2) {
+            const team1Data = pslData.teams[team1];
+            const team2Data = pslData.teams[team2];
+            
+            let team1Score = 0;
+            let team2Score = 0;
+            
+            // Win percentage in PSL 2025 (40% of form score)
+            team1Score += (team1Data.wins / team1Data.matches) * 40;
+            team2Score += (team2Data.wins / team2Data.matches) * 40;
+            
+            // Recent form - last 5 matches (40% of form score)
+            const team1RecentForm = team1Data.form.slice(-5);
+            const team2RecentForm = team2Data.form.slice(-5);
+            
+            const team1RecentWins = (team1RecentForm.match(/W/g) || []).length;
+            const team2RecentWins = (team2RecentForm.match(/W/g) || []).length;
+            
+            team1Score += (team1RecentWins / 5) * 40;
+            team2Score += (team2RecentWins / 5) * 40;
+            
+            // Net run rate (20% of form score)
+            const team1NRR = parseFloat(team1Data.nrr) || 0;
+            const team2NRR = parseFloat(team2Data.nrr) || 0;
+            
+            // Normalize NRR to a 0-100 scale
+            const maxNRR = Math.max(Math.abs(team1NRR), Math.abs(team2NRR), 1);
+            team1Score += ((team1NRR + maxNRR) / (2 * maxNRR)) * 20;
+            team2Score += ((team2NRR + maxNRR) / (2 * maxNRR)) * 20;
+            
+            return { team1: team1Score, team2: team2Score };
+        }
+
+        // Calculate conditions score
+        function calculateConditionsScore(team1, team2, weather, venue) {
+            let team1Score = 50;
+            let team2Score = 50;
+            
+            // Key player availability (40% of conditions score)
+            // Assuming all players are available for now
+            team1Score += 20;
+            team2Score += 20;
+            
+            // Team balance (30% of conditions score)
+            // Using win percentage as a proxy for team balance
+            const team1Data = pslData.teams[team1];
+            const team2Data = pslData.teams[team2];
+            
+            team1Score += (team1Data.wins / team1Data.matches) * 15;
+            team2Score += (team2Data.wins / team2Data.matches) * 15;
+            
+            // Weather conditions (30% of conditions score)
+            const weatherAdvantage = {
+                'Clear': { fast: 0, spin: 0 },
+                'Cloudy': { fast: 10, spin: -5 },
+                'Light Rain': { fast: 15, spin: -10 },
+                'Hot and Humid': { fast: -5, spin: 10 }
+            }[weather];
+            
+            // Assign advantage based on team strengths (simplified)
+            const teamStrengths = {
+                "Islamabad United": "balanced",
+                "Lahore Qalandars": "fast",
+                "Karachi Kings": "balanced",
+                "Quetta Gladiators": "spin",
+                "Peshawar Zalmi": "fast",
+                "Multan Sultans": "spin"
+            };
+            
+            if (teamStrengths[team1] === "fast") team1Score += weatherAdvantage.fast;
+            if (teamStrengths[team1] === "spin") team1Score += weatherAdvantage.spin;
+            if (teamStrengths[team2] === "fast") team2Score += weatherAdvantage.fast;
+            if (teamStrengths[team2] === "spin") team2Score += weatherAdvantage.spin;
+            
+            return { team1: team1Score, team2: team2Score };
         }
 
         // Function to update additional match-specific data
@@ -1017,6 +1171,70 @@
                 document.getElementById(tabId).classList.add('active');
             }
         });
+
+        // Overall PSL head-to-head data (all-time)
+        const overallHeadToHead = {
+            "Islamabad United-Quetta Gladiators": {
+                matches: 20,
+                team1Wins: 10,
+                team2Wins: 9,
+                noResult: 1
+            },
+            "Karachi Kings-Lahore Qalandars": {
+                matches: 19,
+                team1Wins: 13,
+                team2Wins: 6,
+                noResult: 0
+            },
+            "Multan Sultans-Peshawar Zalmi": {
+                matches: 16,
+                team1Wins: 11,
+                team2Wins: 5,
+                noResult: 0
+            },
+            "Karachi Kings-Peshawar Zalmi": {
+                matches: 21,
+                team1Wins: 6,
+                team2Wins: 15,
+                noResult: 0
+            },
+            "Lahore Qalandars-Peshawar Zalmi": {
+                matches: 19,
+                team1Wins: 8,
+                team2Wins: 11,
+                noResult: 0
+            },
+            "Islamabad United-Multan Sultans": {
+                matches: 16,
+                team1Wins: 8,
+                team2Wins: 8,
+                noResult: 0
+            },
+            "Karachi Kings-Quetta Gladiators": {
+                matches: 18,
+                team1Wins: 6,
+                team2Wins: 12,
+                noResult: 0
+            },
+            "Lahore Qalandars-Multan Sultans": {
+                matches: 19,
+                team1Wins: 9,
+                team2Wins: 10,
+                noResult: 0
+            },
+            "Islamabad United-Peshawar Zalmi": {
+                matches: 24,
+                team1Wins: 12,
+                team2Wins: 12,
+                noResult: 0
+            },
+            "Quetta Gladiators-Multan Sultans": {
+                matches: 13,
+                team1Wins: 4,
+                team2Wins: 9,
+                noResult: 0
+            }
+        };
 
         // PSL 2025 comprehensive match data
         const pslData = {
@@ -1280,32 +1498,6 @@
             document.getElementById('venue-performance').innerHTML = `<span style="color: #2B6735;">See venue analysis tab for details</span>`;
             document.getElementById('recent-form').innerHTML = `<span style="color: #B27F35;">${team1}: ${team1Data.form} | ${team2}: ${team2Data.form}</span>`;
             document.getElementById('key-players-status').innerHTML = `<span style="color: #2B6735;">All players available unless otherwise noted</span>`;
-
-            // Update Head to Head tab
-            document.getElementById('total-matches').textContent = h2hData.total;
-            document.getElementById('team1-wins').textContent = team1Wins;
-            document.getElementById('team2-wins').textContent = team2Wins;
-            document.querySelector('.team1-stat .h2h-label').textContent = `${team1} Wins`;
-            document.querySelector('.team2-stat .h2h-label').textContent = `${team2} Wins`;
-
-            // Update recent H2H matches
-            let recentH2HHtml = '';
-            if (h2hData.matches && h2hData.matches.length > 0) {
-                h2hData.matches.forEach(match => {
-                    const winnerColor = match.result.includes(team1) && match.result.includes('won') ? '#2B6735' : 
-                                      match.result.includes(team2) && match.result.includes('won') ? '#B27F35' : '#666';
-                    recentH2HHtml += `
-                        <div class="match-result">
-                            <strong>${match.date}</strong><br>
-                            <span style="color: ${winnerColor};">${match.result}</span><br>
-                            <small>${match.scores}</small>
-                        </div>
-                    `;
-                });
-            } else {
-                recentH2HHtml = `<div class="match-result">These teams haven't played each other in PSL 2025 yet.</div>`;
-            }
-            document.getElementById('recent-h2h-matches').innerHTML = recentH2HHtml;
 
             // Update Venue Analysis tab
             document.getElementById('venue-name').textContent = `${venue} Cricket Stadium Stats`;
