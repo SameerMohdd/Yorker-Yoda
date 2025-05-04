@@ -14,13 +14,16 @@
             color: #333;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             background-color: white;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             border: 2px solid #B27F35;
+        }
+        .inner-content {
+            padding-right: 20px; /* Try increasing to 15px or 20px if needed */
         }
         header {
             text-align: center;
@@ -468,18 +471,22 @@
 </head>
 <body>
     <div class="container">
-        <header>
+        <div class="inner-content">
+          <header>
             <div class="cricket-icons"></div>
             <div class="header-content">
-                <div class="logo">
-                    <div class="yoda-emoji">🧙</div>
-                </div>
-                <div>
-                    <h1>Yorker Yoda</h1>
-                    <p class="tagline">PSL Match Predictor</p>
-                </div>
+              <div class="logo">
+                <div class="yoda-emoji">🧙</div>
+              </div>
+              <div>
+                <h1>Winning Yoda</h1>
+                <p class="tagline">PSL Match Predictor</p>
+              </div>
             </div>
-        </header>
+          </header>
+          <!-- Add more content here if needed -->
+        </div>
+      </div>
 
         <div class="match-selector">
             <label for="match-select">Select Upcoming Match:</label>
@@ -635,96 +642,96 @@
     <script>
         // Team data with details
         const teamData = {
-            "Islamabad United": { code: "IU", color: "#A81D33" },
-            "Peshawar Zalmi": { code: "PZ", color: "#FFC700" },
-            "Quetta Gladiators": { code: "QG", color: "#4B0082" },
-            "Lahore Qalandars": { code: "LQ", color: "#00A651" },
-            "Karachi Kings": { code: "KK", color: "#1C3C7C" },
-            "Multan Sultans": { code: "MS", color: "#00B5AF" }
+            "islamabad united": { code: "IU", color: "#A81D33" },
+            "peshawar zalmi": { code: "PZ", color: "#FFC700" },
+            "quetta gladiators": { code: "QG", color: "#4B0082" },
+            "lahore qalandars": { code: "LQ", color: "#00A651" },
+            "karachi kings": { code: "KK", color: "#1C3C7C" },
+            "multan sultans": { code: "MS", color: "#00B5AF" }
         };
 
         // All PSL 2025 matches - Updated with remaining games
         const allMatches = {
             "Match23": {
-                team1: "Islamabad United",
-                team2: "Quetta Gladiators",
+                team1: "islamabad united",
+                team2: "quetta gladiators",
                 date: "2025-05-03",
                 time: "8:00 PM",
                 venue: "Lahore"
             },
             "Match24": {
-                team1: "Lahore Qalandars",
-                team2: "Karachi Kings",
+                team1: "lahore qalandars",
+                team2: "karachi kings",
                 date: "2025-05-04",
                 time: "8:00 PM",
                 venue: "Lahore"
             },
             "Match25": {
-                team1: "Multan Sultans",
-                team2: "Peshawar Zalmi",
+                team1: "multan sultans",
+                team2: "peshawar zalmi",
                 date: "2025-05-05",
                 time: "8:00 PM",
                 venue: "Multan"
             },
             "Match26": {
-                team1: "Islamabad United",
-                team2: "Quetta Gladiators",
+                team1: "islamabad united",
+                team2: "quetta gladiators",
                 date: "2025-05-06",
                 time: "8:00 PM",
                 venue: "Rawalpindi"
             },
             "Match27": {
-                team1: "Peshawar Zalmi",
-                team2: "Karachi Kings",
+                team1: "peshawar zalmi",
+                team2: "karachi kings",
                 date: "2025-05-07",
                 time: "8:00 PM",
                 venue: "Rawalpindi"
             },
             "Match28": {
-                team1: "Lahore Qalandars",
-                team2: "Peshawar Zalmi",
+                team1: "lahore qalandars",
+                team2: "peshawar zalmi",
                 date: "2025-05-08",
                 time: "8:00 PM",
                 venue: "Rawalpindi"
             },
             "Match29": {
-                team1: "Multan Sultans",
-                team2: "Islamabad United",
+                team1: "multan sultans",
+                team2: "islamabad united",
                 date: "2025-05-09",
                 time: "8:00 PM",
                 venue: "Multan"
             },
             "Match30": {
-                team1: "Karachi Kings",
-                team2: "Quetta Gladiators",
+                team1: "karachi kings",
+                team2: "quetta gladiators",
                 date: "2025-05-10",
                 time: "8:00 PM",
                 venue: "Karachi"
             },
             "Match31": {
-                team1: "Lahore Qalandars",
-                team2: "Multan Sultans",
+                team1: "lahore qalandars",
+                team2: "multan sultans",
                 date: "2025-05-11",
                 time: "3:00 PM",
                 venue: "Lahore"
             },
             "Match32": {
-                team1: "Peshawar Zalmi",
-                team2: "Islamabad United",
+                team1: "peshawar zalmi",
+                team2: "islamabad united",
                 date: "2025-05-11",
                 time: "8:00 PM",
                 venue: "Lahore"
             },
             "Match33": {
-                team1: "Karachi Kings",
-                team2: "Lahore Qalandars",
+                team1: "karachi kings",
+                team2: "lahore qalandars",
                 date: "2025-05-12",
                 time: "8:00 PM",
                 venue: "Lahore"
             },
             "Match34": {
-                team1: "Quetta Gladiators",
-                team2: "Multan Sultans",
+                team1: "quetta gladiators",
+                team2: "multan sultans",
                 date: "2025-05-12",
                 time: "8:00 PM",
                 venue: "Lahore"
@@ -944,12 +951,12 @@
 
                 const winner = team1Prob > team2Prob ? team1 : team2;
                 const keyPlayers = {
-                    "Islamabad United": ["Shadab Khan", "Alex Hales", "Faheem Ashraf"],
-                    "Lahore Qalandars": ["Shaheen Afridi", "Fakhar Zaman", "Haris Rauf"],
-                    "Karachi Kings": ["Babar Azam", "Imad Wasim", "Mohammad Amir"],
-                    "Quetta Gladiators": ["Mohammad Hasnain", "Jason Roy", "Mohammad Nawaz"],
-                    "Peshawar Zalmi": ["Wahab Riaz", "Shoaib Malik", "Liam Livingstone"],
-                    "Multan Sultans": ["Mohammad Rizwan", "Khushdil Shah", "Shahnawaz Dahani"]
+                    "islamabad united": ["Shadab Khan", "Alex Hales", "Faheem Ashraf"],
+                    "lahore qalandars": ["Shaheen Afridi", "Fakhar Zaman", "Haris Rauf"],
+                    "karachi kings": ["Babar Azam", "Imad Wasim", "Mohammad Amir"],
+                    "quetta gladiators": ["Mohammad Hasnain", "Jason Roy", "Mohammad Nawaz"],
+                    "peshawar zalmi": ["Wahab Riaz", "Shoaib Malik", "Liam Livingstone"],
+                    "multan sultans": ["Mohammad Rizwan", "Khushdil Shah", "Shahnawaz Dahani"]
                 };
 
                 const keyPlayer = keyPlayers[winner][Math.floor(Math.random() * 3)];
@@ -1135,12 +1142,12 @@
             
             // Assign advantage based on team strengths (simplified)
             const teamStrengths = {
-                "Islamabad United": "balanced",
-                "Lahore Qalandars": "fast",
-                "Karachi Kings": "balanced",
-                "Quetta Gladiators": "spin",
-                "Peshawar Zalmi": "fast",
-                "Multan Sultans": "spin"
+                "islamabad united": "balanced",
+                "lahore qalandars": "fast",
+                "karachi kings": "balanced",
+                "quetta gladiators": "spin",
+                "peshawar zalmi": "fast",
+                "multan sultans": "spin"
             };
             
             if (teamStrengths[team1] === "fast") team1Score += weatherAdvantage.fast;
@@ -1174,61 +1181,61 @@
 
         // Overall PSL head-to-head data (all-time)
         const overallHeadToHead = {
-            "Islamabad United-Quetta Gladiators": {
+            "islamabad united-quetta gladiators": {
                 matches: 20,
                 team1Wins: 10,
                 team2Wins: 9,
                 noResult: 1
             },
-            "Karachi Kings-Lahore Qalandars": {
+            "karachi kings-lahore qalandars": {
                 matches: 19,
                 team1Wins: 13,
                 team2Wins: 6,
                 noResult: 0
             },
-            "Multan Sultans-Peshawar Zalmi": {
+            "multan sultans-peshawar zalmi": {
                 matches: 16,
                 team1Wins: 11,
                 team2Wins: 5,
                 noResult: 0
             },
-            "Karachi Kings-Peshawar Zalmi": {
+            "karachi kings-peshawar zalmi": {
                 matches: 21,
                 team1Wins: 6,
                 team2Wins: 15,
                 noResult: 0
             },
-            "Lahore Qalandars-Peshawar Zalmi": {
+            "lahore qalandars-peshawar zalmi": {
                 matches: 19,
                 team1Wins: 8,
                 team2Wins: 11,
                 noResult: 0
             },
-            "Islamabad United-Multan Sultans": {
+            "islamabad united-multan sultans": {
                 matches: 16,
                 team1Wins: 8,
                 team2Wins: 8,
                 noResult: 0
             },
-            "Karachi Kings-Quetta Gladiators": {
+            "karachi kings-quetta gladiators": {
                 matches: 18,
                 team1Wins: 6,
                 team2Wins: 12,
                 noResult: 0
             },
-            "Lahore Qalandars-Multan Sultans": {
+            "lahore qalandars-multan sultans": {
                 matches: 19,
                 team1Wins: 9,
                 team2Wins: 10,
                 noResult: 0
             },
-            "Islamabad United-Peshawar Zalmi": {
+            "islamabad united-peshawar zalmi": {
                 matches: 24,
                 team1Wins: 12,
                 team2Wins: 12,
                 noResult: 0
             },
-            "Quetta Gladiators-Multan Sultans": {
+            "quetta gladiators-multan sultans": {
                 matches: 13,
                 team1Wins: 4,
                 team2Wins: 9,
@@ -1239,7 +1246,7 @@
         // PSL 2025 comprehensive match data
         const pslData = {
             teams: {
-                "Islamabad United": {
+                "islamabad united": {
                     matches: 8,
                     wins: 6,
                     losses: 2,
@@ -1247,14 +1254,14 @@
                     nrr: "+1.285",
                     form: "WWWWWLLW",
                     recentMatches: [
-                        { opponent: "Peshawar Zalmi", result: "Lost by 6 wickets", date: "2025-05-02" },
-                        { opponent: "Lahore Qalandars", result: "Lost by 88 runs", date: "2025-04-30" },
-                        { opponent: "Lahore Qalandars", result: "Lost by 5 wickets", date: "2025-04-26" },
-                        { opponent: "Multan Sultans", result: "Won by 7 wickets", date: "2025-04-23" },
-                        { opponent: "Karachi Kings", result: "Won by 6 wickets", date: "2025-04-20" }
+                        { opponent: "peshawar zalmi", result: "Lost by 6 wickets", date: "2025-05-02" },
+                        { opponent: "lahore qalandars", result: "Lost by 88 runs", date: "2025-04-30" },
+                        { opponent: "lahore qalandars", result: "Lost by 5 wickets", date: "2025-04-26" },
+                        { opponent: "multan sultans", result: "Won by 7 wickets", date: "2025-04-23" },
+                        { opponent: "karachi kings", result: "Won by 6 wickets", date: "2025-04-20" }
                     ]
                 },
-                "Lahore Qalandars": {
+                "lahore qalandars": {
                     matches: 8,
                     wins: 5,
                     losses: 2,
@@ -1262,14 +1269,14 @@
                     nrr: "+0.635",
                     form: "WLWWWLW",
                     recentMatches: [
-                        { opponent: "Quetta Gladiators", result: "No result (Rain)", date: "2025-05-01" },
-                        { opponent: "Islamabad United", result: "Won by 88 runs", date: "2025-04-30" },
-                        { opponent: "Islamabad United", result: "Won by 5 wickets", date: "2025-04-26" },
-                        { opponent: "Peshawar Zalmi", result: "Lost by 7 wickets", date: "2025-04-24" },
-                        { opponent: "Multan Sultans", result: "Lost by 33 runs", date: "2025-04-22" }
+                        { opponent: "quetta gladiators", result: "No result (Rain)", date: "2025-05-01" },
+                        { opponent: "islamabad united", result: "Won by 88 runs", date: "2025-04-30" },
+                        { opponent: "islamabad united", result: "Won by 5 wickets", date: "2025-04-26" },
+                        { opponent: "peshawar zalmi", result: "Lost by 7 wickets", date: "2025-04-24" },
+                        { opponent: "multan sultans", result: "Lost by 33 runs", date: "2025-04-22" }
                     ]
                 },
-                "Karachi Kings": {
+                "karachi kings": {
                     matches: 8,
                     wins: 4,
                     losses: 4,
@@ -1277,14 +1284,14 @@
                     nrr: "-0.148",
                     form: "WLWLWWLW",
                     recentMatches: [
-                        { opponent: "Multan Sultans", result: "Won by 87 runs", date: "2025-05-01" },
-                        { opponent: "Quetta Gladiators", result: "Lost by 5 runs", date: "2025-04-25" },
-                        { opponent: "Peshawar Zalmi", result: "Won by 2 wickets", date: "2025-04-21" },
-                        { opponent: "Islamabad United", result: "Lost by 6 wickets", date: "2025-04-20" },
-                        { opponent: "Quetta Gladiators", result: "Won by 56 runs", date: "2025-04-18" }
+                        { opponent: "multan sultans", result: "Won by 87 runs", date: "2025-05-01" },
+                        { opponent: "quetta gladiators", result: "Lost by 5 runs", date: "2025-04-25" },
+                        { opponent: "peshawar zalmi", result: "Won by 2 wickets", date: "2025-04-21" },
+                        { opponent: "islamabad united", result: "Lost by 6 wickets", date: "2025-04-20" },
+                        { opponent: "quetta gladiators", result: "Won by 56 runs", date: "2025-04-18" }
                     ]
                 },
-                "Quetta Gladiators": {
+                "quetta gladiators": {
                     matches: 8,
                     wins: 4,
                     losses: 3,
@@ -1292,14 +1299,14 @@
                     nrr: "+0.245",
                     form: "LWLWWWW",
                     recentMatches: [
-                        { opponent: "Lahore Qalandars", result: "No result (Rain)", date: "2025-05-01" },
-                        { opponent: "Multan Sultans", result: "Won by 10 wickets", date: "2025-04-29" },
-                        { opponent: "Peshawar Zalmi", result: "Won by 64 runs", date: "2025-04-27" },
-                        { opponent: "Karachi Kings", result: "Won by 5 runs", date: "2025-04-25" },
-                        { opponent: "Karachi Kings", result: "Lost by 56 runs", date: "2025-04-18" }
+                        { opponent: "lahore qalandars", result: "No result (Rain)", date: "2025-05-01" },
+                        { opponent: "multan sultans", result: "Won by 10 wickets", date: "2025-04-29" },
+                        { opponent: "peshawar zalmi", result: "Won by 64 runs", date: "2025-04-27" },
+                        { opponent: "karachi kings", result: "Won by 5 runs", date: "2025-04-25" },
+                        { opponent: "karachi kings", result: "Lost by 56 runs", date: "2025-04-18" }
                     ]
                 },
-                "Peshawar Zalmi": {
+                "peshawar zalmi": {
                     matches: 8,
                     wins: 3,
                     losses: 5,
@@ -1307,14 +1314,14 @@
                     nrr: "-0.622",
                     form: "WLLWLLW",
                     recentMatches: [
-                        { opponent: "Islamabad United", result: "Won by 6 wickets", date: "2025-05-02" },
-                        { opponent: "Lahore Qalandars", result: "Won by 7 wickets", date: "2025-04-24" },
-                        { opponent: "Quetta Gladiators", result: "Lost by 64 runs", date: "2025-04-27" },
-                        { opponent: "Karachi Kings", result: "Lost by 2 wickets", date: "2025-04-21" },
-                        { opponent: "Multan Sultans", result: "Won by 120 runs", date: "2025-04-19" }
+                        { opponent: "islamabad united", result: "Won by 6 wickets", date: "2025-05-02" },
+                        { opponent: "lahore qalandars", result: "Won by 7 wickets", date: "2025-04-24" },
+                        { opponent: "quetta gladiators", result: "Lost by 64 runs", date: "2025-04-27" },
+                        { opponent: "karachi kings", result: "Lost by 2 wickets", date: "2025-04-21" },
+                        { opponent: "multan sultans", result: "Won by 120 runs", date: "2025-04-19" }
                     ]
                 },
-                "Multan Sultans": {
+                "multan sultans": {
                     matches: 8,
                     wins: 1,
                     losses: 7,
@@ -1322,108 +1329,108 @@
                     nrr: "-1.387",
                     form: "LLLLWLLL",
                     recentMatches: [
-                        { opponent: "Karachi Kings", result: "Lost by 87 runs", date: "2025-05-01" },
-                        { opponent: "Quetta Gladiators", result: "Lost by 10 wickets", date: "2025-04-29" },
-                        { opponent: "Islamabad United", result: "Lost by 7 wickets", date: "2025-04-23" },
-                        { opponent: "Lahore Qalandars", result: "Won by 33 runs", date: "2025-04-22" },
-                        { opponent: "Peshawar Zalmi", result: "Lost by 120 runs", date: "2025-04-19" }
+                        { opponent: "karachi kings", result: "Lost by 87 runs", date: "2025-05-01" },
+                        { opponent: "quetta gladiators", result: "Lost by 10 wickets", date: "2025-04-29" },
+                        { opponent: "islamabad united", result: "Lost by 7 wickets", date: "2025-04-23" },
+                        { opponent: "lahore qalandars", result: "Won by 33 runs", date: "2025-04-22" },
+                        { opponent: "peshawar zalmi", result: "Lost by 120 runs", date: "2025-04-19" }
                     ]
                 }
             },
             headToHead: {
-                "Multan Sultans-Peshawar Zalmi": {
+                "multan sultans-peshawar zalmi": {
                     total: 1,
                     matches: [
-                        { date: "2025-04-19", result: "Peshawar Zalmi won by 120 runs", scores: "PZ: 227/7, MS: 107 all out" }
+                        { date: "2025-04-19", result: "peshawar zalmi won by 120 runs", scores: "PZ: 227/7, MS: 107 all out" }
                     ]
                 },
-                "Islamabad United-Lahore Qalandars": {
+                "islamabad united-lahore qalandars": {
                     total: 3,
                     matches: [
-                        { date: "2025-04-30", result: "Lahore Qalandars won by 88 runs", scores: "LQ: 202/6, IU: 114 all out" },
-                        { date: "2025-04-26", result: "Lahore Qalandars won by 5 wickets", scores: "IU: 185/6, LQ: 186/5" },
-                        { date: "2025-04-11", result: "Islamabad United won by 8 wickets", scores: "LQ: 139/10, IU: 143/2" }
+                        { date: "2025-04-30", result: "lahore qalandars won by 88 runs", scores: "LQ: 202/6, IU: 114 all out" },
+                        { date: "2025-04-26", result: "lahore qalandars won by 5 wickets", scores: "IU: 185/6, LQ: 186/5" },
+                        { date: "2025-04-11", result: "islamabad united won by 8 wickets", scores: "LQ: 139/10, IU: 143/2" }
                     ]
                 },
-                "Karachi Kings-Multan Sultans": {
+                "karachi kings-multan sultans": {
                     total: 2,
                     matches: [
-                        { date: "2025-05-01", result: "Karachi Kings won by 87 runs", scores: "KK: 201/5, MS: 114 all out" },
-                        { date: "2025-04-12", result: "Karachi Kings won by 4 wickets", scores: "MS: 234/3, KK: 236/6" }
+                        { date: "2025-05-01", result: "karachi kings won by 87 runs", scores: "KK: 201/5, MS: 114 all out" },
+                        { date: "2025-04-12", result: "karachi kings won by 4 wickets", scores: "MS: 234/3, KK: 236/6" }
                     ]
                 },
-                "Peshawar Zalmi-Quetta Gladiators": {
+                "peshawar zalmi-quetta gladiators": {
                     total: 2,
                     matches: [
-                        { date: "2025-04-27", result: "Quetta Gladiators won by 64 runs", scores: "QG: 182/5, PZ: 118 all out" },
-                        { date: "2025-04-12", result: "Quetta Gladiators won by 80 runs", scores: "QG: 216/3, PZ: 136 all out" }
+                        { date: "2025-04-27", result: "quetta gladiators won by 64 runs", scores: "QG: 182/5, PZ: 118 all out" },
+                        { date: "2025-04-12", result: "quetta gladiators won by 80 runs", scores: "QG: 216/3, PZ: 136 all out" }
                     ]
                 },
-                "Karachi Kings-Lahore Qalandars": {
+                "karachi kings-lahore qalandars": {
                     total: 1,
                     matches: [
-                        { date: "2025-04-15", result: "Lahore Qalandars won by 65 runs", scores: "LQ: 226/4, KK: 161 all out" }
+                        { date: "2025-04-15", result: "lahore qalandars won by 65 runs", scores: "LQ: 226/4, KK: 161 all out" }
                     ]
                 },
-                "Islamabad United-Multan Sultans": {
+                "islamabad united-multan sultans": {
                     total: 2,
                     matches: [
-                        { date: "2025-04-23", result: "Islamabad United won by 7 wickets", scores: "MS: 148/8, IU: 149/3" },
-                        { date: "2025-04-16", result: "Islamabad United won by 47 runs", scores: "IU: 184/5, MS: 137 all out" }
+                        { date: "2025-04-23", result: "islamabad united won by 7 wickets", scores: "MS: 148/8, IU: 149/3" },
+                        { date: "2025-04-16", result: "islamabad united won by 47 runs", scores: "IU: 184/5, MS: 137 all out" }
                     ]
                 },
-                "Karachi Kings-Quetta Gladiators": {
+                "karachi kings-quetta gladiators": {
                     total: 2,
                     matches: [
-                        { date: "2025-04-25", result: "Quetta Gladiators won by 5 runs", scores: "QG: 170/7, KK: 165/8" },
-                        { date: "2025-04-18", result: "Karachi Kings won by 56 runs", scores: "KK: 205/6, QG: 149 all out" }
+                        { date: "2025-04-25", result: "quetta gladiators won by 5 runs", scores: "QG: 170/7, KK: 165/8" },
+                        { date: "2025-04-18", result: "karachi kings won by 56 runs", scores: "KK: 205/6, QG: 149 all out" }
                     ]
                 },
-                "Lahore Qalandars-Peshawar Zalmi": {
+                "lahore qalandars-peshawar zalmi": {
                     total: 1,
                     matches: [
-                        { date: "2025-04-24", result: "Peshawar Zalmi won by 7 wickets", scores: "LQ: 172/6, PZ: 173/3" }
+                        { date: "2025-04-24", result: "peshawar zalmi won by 7 wickets", scores: "LQ: 172/6, PZ: 173/3" }
                     ]
                 },
-                "Islamabad United-Karachi Kings": {
+                "islamabad united-karachi kings": {
                     total: 1,
                     matches: [
-                        { date: "2025-04-20", result: "Islamabad United won by 6 wickets", scores: "KK: 165/7, IU: 166/4" }
+                        { date: "2025-04-20", result: "islamabad united won by 6 wickets", scores: "KK: 165/7, IU: 166/4" }
                     ]
                 },
-                "Karachi Kings-Peshawar Zalmi": {
+                "karachi kings-peshawar zalmi": {
                     total: 1,
                     matches: [
-                        { date: "2025-04-21", result: "Karachi Kings won by 2 wickets", scores: "PZ: 178/6, KK: 179/8" }
+                        { date: "2025-04-21", result: "karachi kings won by 2 wickets", scores: "PZ: 178/6, KK: 179/8" }
                     ]
                 },
-                "Lahore Qalandars-Multan Sultans": {
+                "lahore qalandars-multan sultans": {
                     total: 1,
                     matches: [
-                        { date: "2025-04-22", result: "Multan Sultans won by 33 runs", scores: "MS: 195/5, LQ: 162 all out" }
+                        { date: "2025-04-22", result: "multan sultans won by 33 runs", scores: "MS: 195/5, LQ: 162 all out" }
                     ]
                 },
-                "Islamabad United-Peshawar Zalmi": {
+                "islamabad united-peshawar zalmi": {
                     total: 2,
                     matches: [
-                        { date: "2025-05-02", result: "Peshawar Zalmi won by 6 wickets", scores: "IU: 163/7, PZ: 164/4" },
-                        { date: "2025-04-14", result: "Islamabad United won by 102 runs", scores: "IU: 254/4, PZ: 152 all out" }
+                        { date: "2025-05-02", result: "peshawar zalmi won by 6 wickets", scores: "IU: 163/7, PZ: 164/4" },
+                        { date: "2025-04-14", result: "islamabad united won by 102 runs", scores: "IU: 254/4, PZ: 152 all out" }
                     ]
                 },
-                "Multan Sultans-Quetta Gladiators": {
+                "multan sultans-quetta gladiators": {
                     total: 1,
                     matches: [
-                        { date: "2025-04-29", result: "Quetta Gladiators won by 10 wickets", scores: "MS: 89 all out, QG: 90/0" }
+                        { date: "2025-04-29", result: "quetta gladiators won by 10 wickets", scores: "MS: 89 all out, QG: 90/0" }
                     ]
                 },
-                "Lahore Qalandars-Quetta Gladiators": {
+                "lahore qalandars-quetta gladiators": {
                     total: 2,
                     matches: [
                         { date: "2025-05-01", result: "No result (Rain)", scores: "Match abandoned" },
-                        { date: "2025-04-13", result: "Lahore Qalandars won by 79 runs", scores: "LQ: 242/5, QG: 163 all out" }
+                        { date: "2025-04-13", result: "lahore qalandars won by 79 runs", scores: "LQ: 242/5, QG: 163 all out" }
                     ]
                 },
-                "Islamabad United-Quetta Gladiators": {
+                "islamabad united-quetta gladiators": {
                     total: 0,
                     matches: []
                 }
@@ -1496,7 +1503,7 @@
             document.getElementById('toss-advantage').innerHTML = `<span style="color: #B27F35;">${venueData.winningToss}</span>`;
             document.getElementById('win-percentage').innerHTML = `<span style="color: #2B6735;">${team1}: ${(team1Data.wins/team1Data.matches*100).toFixed(1)}% | ${team2}: ${(team2Data.wins/team2Data.matches*100).toFixed(1)}%</span>`;
             document.getElementById('venue-performance').innerHTML = `<span style="color: #2B6735;">See venue analysis tab for details</span>`;
-            document.getElementById('recent-form').innerHTML = `<span style="color: #B27F35;">${team1}: ${team1Data.form} | ${team2}: ${team2Data.form}</span>`;
+            document.getElementById('recent-form').innerHTML = `<span style="color: #B27F35;">${team1}: ${team1Data.form.slice(-5)} | ${team2}: ${team2Data.form.slice(-5)}</span>`;
             document.getElementById('key-players-status').innerHTML = `<span style="color: #2B6735;">All players available unless otherwise noted</span>`;
 
             // Update Venue Analysis tab
