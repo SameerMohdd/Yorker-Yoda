@@ -1503,7 +1503,7 @@
             document.getElementById('toss-advantage').innerHTML = `<span style="color: #B27F35;">${venueData.winningToss}</span>`;
             document.getElementById('win-percentage').innerHTML = `<span style="color: #2B6735;">${team1}: ${(team1Data.wins/team1Data.matches*100).toFixed(1)}% | ${team2}: ${(team2Data.wins/team2Data.matches*100).toFixed(1)}%</span>`;
             document.getElementById('venue-performance').innerHTML = `<span style="color: #2B6735;">See venue analysis tab for details</span>`;
-            document.getElementById('recent-form').innerHTML = `<span style="color: #B27F35;">${team1}: ${team1Data.form} | ${team2}: ${team2Data.form}</span>`;
+            document.getElementById('recent-form').innerHTML = `<span style="color: #B27F35;">${team1}: ${team1Data.form.slice(-5)} | ${team2}: ${team2Data.form.slice(-5)}</span>`;
             document.getElementById('key-players-status').innerHTML = `<span style="color: #2B6735;">All players available unless otherwise noted</span>`;
 
             // Update Venue Analysis tab
