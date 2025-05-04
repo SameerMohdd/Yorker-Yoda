@@ -100,6 +100,214 @@
             opacity: 0.9;
             font-size: 1.2em;
         }
+        
+        /* News Ticker */
+        .news-ticker {
+            background-color: #B27F35;
+            color: #2B6735;
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+            font-weight: bold;
+            border-top: 2px solid #2B6735;
+            border-bottom: 2px solid #2B6735;
+            margin-bottom: 20px;
+        }
+        
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .ticker-content {
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+            padding-left: 100%;
+            display: inline-block;
+        }
+        
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        /* Social Media Highlights */
+        .social-highlights {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-top: 4px solid #2B6735;
+        }
+        
+        .social-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2B6735;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .social-posts {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .social-post {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 3px solid #B27F35;
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+            border: 2px solid #B27F35;
+        }
+        
+        .post-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .post-info {
+            flex: 1;
+        }
+        
+        .post-author {
+            font-weight: bold;
+            margin-bottom: 2px;
+            color: #2B6735;
+        }
+        
+        .post-date {
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .post-content {
+            margin-bottom: 10px;
+        }
+        
+        .post-image {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #B27F35;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .post-action {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .post-action i {
+            margin-right: 5px;
+        }
+        
+        /* Upcoming Matches */
+        .upcoming-matches {
+            margin-top: 30px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+            border-top: 4px solid #2B6735;
+        }
+        
+        .match-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .match-item {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            border-left: 4px solid #2B6735;
+        }
+        
+        .match-item-header {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        
+        .match-item-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .match-item-team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .match-item-logo {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 5px;
+        }
+        
+        .match-item-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .match-item-name {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: capitalize;
+            color: #2B6735;
+        }
+        
+        .match-item-vs {
+            font-size: 14px;
+            font-weight: bold;
+            color: #B27F35;
+        }
+        
+        .match-item-footer {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #2B6735;
+            font-weight: bold;
+        }
         .match-selector {
             margin: 20px 0;
             background: rgba(43, 103, 53, 0.1);
@@ -474,7 +682,7 @@
             <div class="cricket-icons"></div>
             <div class="header-content">
               <div class="logo">
-                <div class="yoda-emoji">🧙</div>
+                <img src="logo/yoda_yorker.png" alt="Yorker_yodas" style="width: 100px; height: 100px; border-radius: 50%;" />
               </div>
               <div>
                 <h1>Winning Yoda</h1>
@@ -482,7 +690,28 @@
               </div>
             </div>
           </header>
-          <!-- Add more content here if needed -->
+          
+          <!-- News Ticker -->
+          <div class="news-ticker">
+            <div class="ticker-wrap">
+              <div class="ticker-content">
+                BREAKING: Quetta Gladiators beat Islamabad United by 2 wickets in a thrilling last-over finish • 
+                Peshawar Zalmi defeat Islamabad United by 6 wickets to keep playoff hopes alive • 
+                Karachi Kings crush Multan Sultans by 87 runs to move up in the points table • 
+                Rain washes out crucial match between Lahore Qalandars and Quetta Gladiators • 
+                PSL confirms final to be held at Gaddafi Stadium on May 18 as scheduled •
+                PSL X trophy 'Luminara' unveiled, adorned with over 22,000 zircon stones •
+                Babar Azam reaches 2000 runs in PSL history, becomes fastest to milestone •
+                Shadab Khan takes 100th PSL wicket, third bowler to achieve feat •
+                BREAKING: Quetta Gladiators beat Islamabad United by 2 wickets in a thrilling last-over finish • 
+                Peshawar Zalmi defeat Islamabad United by 6 wickets to keep playoff hopes alive • 
+                Karachi Kings crush Multan Sultans by 87 runs to move up in the points table • 
+                Rain washes out crucial match between Lahore Qalandars and Quetta Gladiators • 
+                PSL confirms final to be held at Gaddafi Stadium on May 18 as scheduled •
+                PSL X trophy 'Luminara' unveiled, adorned with over 22,000 zircon stones
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -635,6 +864,80 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Upcoming Matches Section -->
+        <div class="upcoming-matches">
+            <h2 class="section-title">Upcoming PSL 2025 Matches</h2>
+            <div class="match-list" id="upcoming-matches-list">
+                <!-- Matches will be dynamically populated here -->
+            </div>
+        </div>
+        
+        <!-- Social Media Highlights -->
+        <div class="social-highlights">
+            <div class="social-title">Social Media Highlights</div>
+            <div class="social-posts">
+                <div class="social-post">
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <img src="logo/psl.png" alt="PSL Official Avatar" />
+                        </div>
+                        <div class="post-info">
+                            <div class="post-author">PSL Official</div>
+                            <div class="post-date">2 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        As we approach the business end of #PSLX, the points table is getting tighter! Which four teams do you think will make it to the playoffs? #PSL2025 #CricketFever
+                    </div>
+                    <div class="post-actions">
+                        <div class="post-action"><i>❤️</i> 5.2K</div>
+                        <div class="post-action"><i>💬</i> 853</div>
+                        <div class="post-action"><i>🔄</i> 1.7K</div>
+                    </div>
+                </div>
+                
+                <div class="social-post">
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <img src="logo/quetta_gladiators.png" alt="Quetta Gladiators Avatar" />
+                        </div>
+                        <div class="post-info">
+                            <div class="post-author">Quetta Gladiators</div>
+                            <div class="post-date">5 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        What a match, what a finish! Our boys held their nerve in a nail-biting finish against Islamabad United! #PurpleForce #QGvIU #PSL2025
+                    </div>
+                    <div class="post-actions">
+                        <div class="post-action"><i>❤️</i> 3.8K</div>
+                        <div class="post-action"><i>💬</i> 492</div>
+                        <div class="post-action"><i>🔄</i> 921</div>
+                    </div>
+                </div>
+                
+                <div class="social-post">
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <img src="logo/analyst.jpeg" alt="Cricket Analyst Avatar" />
+                        </div>
+                        <div class="post-info">
+                            <div class="post-author">Cricket Analyst</div>
+                            <div class="post-date">Yesterday</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Mohammad Rizwan continues to be the standout batsman in #PSLX with 346 runs in 7 innings at an average of 86.50. Phenomenal consistency from the Multan Sultans captain despite his team's struggles. #PSL2025 #CricketStats
+                    </div>
+                    <div class="post-actions">
+                        <div class="post-action"><i>❤️</i> 2.4K</div>
+                        <div class="post-action"><i>💬</i> 315</div>
+                        <div class="post-action"><i>🔄</i> 687</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -650,117 +953,82 @@
 
         // All PSL 2025 matches - Updated with remaining games
         const allMatches = {
-            "Match23": {
-                team1: "islamabad united",
-                team2: "quetta gladiators",
-                date: "2025-05-03",
-                time: "8:00 PM",
-                venue: "Lahore"
-            },
             "Match24": {
                 team1: "lahore qalandars",
                 team2: "karachi kings",
                 date: "2025-05-04",
-                time: "8:00 PM",
+                time: "7:00 PM",
                 venue: "Lahore"
             },
             "Match25": {
                 team1: "multan sultans",
                 team2: "peshawar zalmi",
                 date: "2025-05-05",
-                time: "8:00 PM",
+                time: "7:00 PM",
                 venue: "Multan"
             },
             "Match26": {
                 team1: "islamabad united",
                 team2: "quetta gladiators",
-                date: "2025-05-06",
-                time: "8:00 PM",
+                date: "2025-05-07",
+                time: "7:00 PM",
                 venue: "Rawalpindi"
             },
             "Match27": {
-                team1: "peshawar zalmi",
-                team2: "karachi kings",
-                date: "2025-05-07",
-                time: "8:00 PM",
+                team1: "karachi kings",
+                team2: "peshawar zalmi",
+                date: "2025-05-08",
+                time: "7:00 PM",
                 venue: "Rawalpindi"
             },
             "Match28": {
                 team1: "lahore qalandars",
                 team2: "peshawar zalmi",
-                date: "2025-05-08",
-                time: "8:00 PM",
+                date: "2025-05-09",
+                time: "7:00 PM",
                 venue: "Rawalpindi"
             },
             "Match29": {
-                team1: "multan sultans",
-                team2: "islamabad united",
-                date: "2025-05-09",
-                time: "8:00 PM",
-                venue: "Multan"
-            },
-            "Match30": {
-                team1: "karachi kings",
-                team2: "quetta gladiators",
+                team1: "islamabad united",
+                team2: "karachi kings",
                 date: "2025-05-10",
-                time: "8:00 PM",
-                venue: "Karachi"
-            },
-            "Match31": {
-                team1: "lahore qalandars",
-                team2: "multan sultans",
-                date: "2025-05-11",
-                time: "3:00 PM",
-                venue: "Lahore"
-            },
-            "Match32": {
-                team1: "peshawar zalmi",
-                team2: "islamabad united",
-                date: "2025-05-11",
-                time: "8:00 PM",
-                venue: "Lahore"
-            },
-            "Match33": {
-                team1: "karachi kings",
-                team2: "lahore qalandars",
-                date: "2025-05-12",
-                time: "8:00 PM",
-                venue: "Lahore"
-            },
-            "Match34": {
-                team1: "quetta gladiators",
-                team2: "multan sultans",
-                date: "2025-05-12",
-                time: "8:00 PM",
-                venue: "Lahore"
-            },
-            // Playoff matches
-            "Qualifier": {
-                team1: "TBD (1st)",
-                team2: "TBD (2nd)",
-                date: "2025-05-13",
-                time: "8:00 PM",
+                time: "7:00 PM",
                 venue: "Rawalpindi"
             },
-            "Eliminator1": {
-                team1: "TBD (3rd)",
-                team2: "TBD (4th)",
+            "Match30": {
+                team1: "multan sultans",
+                team2: "quetta gladiators",
+                date: "2025-05-11",
+                time: "7:00 PM",
+                venue: "Multan"
+            },
+            // Playoff matches
+            "Qualifier 1": {
+                team1: "TBA",
+                team2: "TBA",
+                date: "2025-05-13",
+                time: "7:00 PM",
+                venue: "Rawalpindi"
+            },
+            "Eliminator": {
+                team1: "TBA",
+                team2: "TBA",
                 date: "2025-05-14",
-                time: "8:00 PM",
+                time: "7:00 PM",
                 venue: "Lahore"
             },
-            "Eliminator2": {
-                team1: "TBD",
-                team2: "TBD",
+            "Qualifier 2": {
+                team1: "TBA",
+                team2: "TBA",
                 date: "2025-05-16",
-                time: "8:00 PM",
+                time: "7:00 PM",
                 venue: "Lahore"
             },
             "Final": {
-                team1: "TBD",
-                team2: "TBD",
+                team1: "TBA",
+                team2: "TBA",
                 date: "2025-05-18",
-                time: "8:00 PM",
+                time: "7:00 PM",
                 venue: "Lahore"
             }
         };
@@ -819,6 +1087,64 @@
                 option.textContent = `${match.team1} vs ${match.team2} - ${dateStr}${timeLabel}`;
                 matchSelect.appendChild(option);
             }
+        }
+        
+        // Function to populate upcoming matches section
+        function populateUpcomingMatches() {
+            const upcomingMatchesList = document.getElementById('upcoming-matches-list');
+            const upcomingMatches = getUpcomingMatches();
+            
+            let html = '';
+            let count = 0;
+            
+            for (const [key, match] of Object.entries(upcomingMatches)) {
+                if (count >= 6) break; // Show only 6 upcoming matches
+                
+                const matchDate = new Date(match.date);
+                const dateStr = matchDate.toLocaleDateString('en-US', { 
+                    weekday: 'short',
+                    month: 'short', 
+                    day: 'numeric',
+                    year: '2-digit'
+                });
+                
+                // Check if teams are TBA
+                const team1Logo = match.team1.includes('TBA') ? 
+                    '<img src="/api/placeholder/40/40" alt="TBA" />' : 
+                    `<img src="logo/${match.team1.replace(' ', '_')}.png" alt="${match.team1} Logo" />`;
+                
+                const team2Logo = match.team2.includes('TBA') ?
+                    '<img src="/api/placeholder/40/40" alt="TBA" />' :
+                    `<img src="logo/${match.team2.replace(' ', '_')}.png" alt="${match.team2} Logo" />`;
+                
+                // Format match number/title
+                const matchTitle = key.includes('Match') ? `${key.replace('Match', 'Match ')}`  : key;
+                
+                html += `
+                    <div class="match-item">
+                        <div class="match-item-header">${dateStr} • ${match.time} • ${match.venue}</div>
+                        <div class="match-item-teams">
+                            <div class="match-item-team">
+                                <div class="match-item-logo">
+                                    ${team1Logo}
+                                </div>
+                                <div class="match-item-name">${match.team1}</div>
+                            </div>
+                            <div class="match-item-vs">VS</div>
+                            <div class="match-item-team">
+                                <div class="match-item-logo">
+                                    ${team2Logo}
+                                </div>
+                                <div class="match-item-name">${match.team2}</div>
+                            </div>
+                        </div>
+                        <div class="match-item-footer">${matchTitle}</div>
+                    </div>
+                `;
+                count++;
+            }
+            
+            upcomingMatchesList.innerHTML = html;
         }
 
         // Function to show match details
@@ -1556,6 +1882,7 @@
         // Initialize when page loads
         window.onload = function() {
             populateMatchSelector();
+            populateUpcomingMatches();
             
             // Add event listeners
             document.getElementById('match-select').addEventListener('change', function() {
