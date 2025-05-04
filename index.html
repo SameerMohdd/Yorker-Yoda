@@ -22,6 +22,9 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             border: 2px solid #B27F35;
         }
+        .inner-content {
+            padding-right: 20px; /* Try increasing to 15px or 20px if needed */
+        }
         header {
             text-align: center;
             background: linear-gradient(to right, #2B6735, #B27F35);
@@ -468,18 +471,22 @@
 </head>
 <body>
     <div class="container">
-        <header>
+        <div class="inner-content">
+          <header>
             <div class="cricket-icons"></div>
             <div class="header-content">
-                <div class="logo">
-                    <div class="yoda-emoji">🧙</div>
-                </div>
-                <div>
-                    <h1>Winning Yoda</h1>
-                    <p class="tagline">PSL Match Predictor</p>
-                </div>
+              <div class="logo">
+                <div class="yoda-emoji">🧙</div>
+              </div>
+              <div>
+                <h1>Winning Yoda</h1>
+                <p class="tagline">PSL Match Predictor</p>
+              </div>
             </div>
-        </header>
+          </header>
+          <!-- Add more content here if needed -->
+        </div>
+      </div>
 
         <div class="match-selector">
             <label for="match-select">Select Upcoming Match:</label>
