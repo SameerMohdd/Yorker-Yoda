@@ -1104,11 +1104,11 @@
                 // Create team icons
                 const team1Icon = match.team1.includes('TBA') ? 
                     '' : 
-                    `<img src="logo/${match.team1.replace(' ', '_')}.png" alt="${match.team1}" class="team-icon">`;
+                    `<img src="logo/${match.team1.toLowerCase().replace(' ', '_')}.png" alt="${match.team1}" class="team-icon">`;
                 
                 const team2Icon = match.team2.includes('TBA') ?
                     '' :
-                    `<img src="logo/${match.team2.replace(' ', '_')}.png" alt="${match.team2}" class="team-icon">`;
+                    `<img src="logo/${match.team2.toLowerCase().replace(' ', '_')}.png" alt="${match.team2}" class="team-icon">`;
                 
                 button.innerHTML = `
                     <div>
