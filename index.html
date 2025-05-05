@@ -1107,15 +1107,15 @@
                     day: 'numeric',
                     year: '2-digit'
                 });
-                
+
                 // Check if teams are TBA
                 const team1Logo = match.team1.includes('TBA') ? 
                     '<img src="/api/placeholder/40/40" alt="TBA" />' : 
-                    `<img src="logo/${match.team1.toLowerCase().replace(' ', '_')}.png" alt="${match.team1} Logo" />`;
+                    `<img src="logo/${(match.team1.toLowerCase()).replace(' ', '_')}.png" alt="${match.team1} Logo" />`;
                 
                 const team2Logo = match.team2.includes('TBA') ?
                     '<img src="/api/placeholder/40/40" alt="TBA" />' :
-                    `<img src="logo/${match.team2.toLowerCase().replace(' ', '_')}.png" alt="${match.team2} Logo" />`;
+                    `<img src="logo/${(match.team2.toLowerCase()).replace(' ', '_')}.png" alt="${match.team2} Logo" />`;
                 
                 // Format match number/title
                 const matchTitle = key.includes('Match') ? `${key.replace('Match', 'Match ')}`  : key;
@@ -1171,8 +1171,8 @@
             const team1Logo = document.getElementById('team1-logo');
             const team2Logo = document.getElementById('team2-logo');
             
-            team1Logo.innerHTML = `<img src="logo/${match.team1.replace(' ', '_')}.png" alt="${match.team1}">`;
-            team2Logo.innerHTML = `<img src="logo/${match.team2.replace(' ', '_')}.png" alt="${match.team2}">`;
+            team1Logo.innerHTML = `<img src="logo/${match.team1.toLowerCase().replace(' ', '_')}.png" alt="${match.team1}">`;
+            team2Logo.innerHTML = `<img src="logo/${match.team2.toLowerCase().replace(' ', '_')}.png" alt="${match.team2}">`;
             
             team1Logo.className = 'team-logo';
             team2Logo.className = 'team-logo';
