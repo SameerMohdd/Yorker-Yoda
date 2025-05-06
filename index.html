@@ -722,18 +722,18 @@
           <div class="news-ticker">
             <div class="ticker-wrap">
               <div class="ticker-content">
-                BREAKING: Karachi Kings beat Lahore Qalandars by 4 wickets, Irfan the hero as Kings ace tense 15-over chase • 
+                BREAKING: Zalmi keep playoff hopes alive after crushing Sultans by 7 Wicket in one sided contest • 
+                Karachi Kings beat Lahore Qalandars by 4 wickets, Irfan the hero as Kings ace tense 15-over chase • 
                 Quetta Gladiators beat Islamabad United by 2 wickets in a thrilling last-over finish • 
-                Peshawar Zalmi defeat Islamabad United by 6 wickets to keep playoff hopes alive • 
-                Karachi Kings crush Multan Sultans by 87 runs to move up in the points table • 
+                Peshawar Zalmi defeat Islamabad United by 6 wickets to keep playoff hopes alive •  
                 PSL confirms final to be held at Gaddafi Stadium on May 18 as scheduled •
                 PSL X trophy 'Luminara' unveiled, adorned with over 22,000 zircon stones •
                 Babar Azam reaches 2000 runs in PSL history, becomes fastest to milestone •
                 Shadab Khan takes 100th PSL wicket, third bowler to achieve feat •
-                BREAKING: Karachi Kings beat Lahore Qalandars by 4 wickets, Irfan the hero as Kings ace tense 15-over chase •
+                BREAKING: Zalmi keep playoff hopes alive after crushing Sultans by 7 Wicket in one sided contest • 
+                Karachi Kings beat Lahore Qalandars by 4 wickets, Irfan the hero as Kings ace tense 15-over chase •
                 Quetta Gladiators beat Islamabad United by 2 wickets in a thrilling last-over finish • 
                 Peshawar Zalmi defeat Islamabad United by 6 wickets to keep playoff hopes alive • 
-                Karachi Kings crush Multan Sultans by 87 runs to move up in the points table •  
                 PSL confirms final to be held at Gaddafi Stadium on May 18 as scheduled •
                 PSL X trophy 'Luminara' unveiled, adorned with over 22,000 zircon stones
               </div>
@@ -1322,12 +1322,12 @@
 
                 const winner = team1Prob > team2Prob ? team1 : team2;
                 const keyPlayers = {
-                    "Islamabad United": ["Shadab Khan", "Naseem Shah", "Colin Munro", "Imad Wasim"],
-                    "Lahore Qalandars": ["Shaheen Afridi", "Fakhar Zaman", "Haris Rauf", "Sam Billings"],
-                    "Karachi Kings": ["David Warner", "Hasan Ali", "James Vince", "Khusdil Shah"],
-                    "Quetta Gladiators": ["Finn Allen", "Abrar ahmed", "Mohammad Amir", "Saud Shakeel"],
-                    "Peshawar Zalmi": ["Babar Azam", "Abdul Samad", "Saim Ayub", "Ali Raza"],
-                    "Multan Sultans": ["Mohammad Rizwan", "Usman Khan", "Josh Little", "Usama Mir"]
+                    "Islamabad United": ["Shadab Khan(c)", "Naseem Shah", "Colin Munro", "Imad Wasim"],
+                    "Lahore Qalandars": ["Shaheen Afridi(c)", "Fakhar Zaman", "Haris Rauf", "Sam Billings"],
+                    "Karachi Kings": ["David Warner(c)", "Hasan Ali", "James Vince", "Khusdil Shah"],
+                    "Quetta Gladiators": ["Saud Shakeel(c)", "Finn Allen", "Abrar ahmed", "Mohammad Amir",],
+                    "Peshawar Zalmi": ["Babar Azam(c)", "Abdul Samad", "Saim Ayub", "Ali Raza"],
+                    "Multan Sultans": ["Mohammad Rizwan(c)", "Usman Khan", "Josh Little", "Usama Mir"]
                 };
 
                 const keyPlayer = keyPlayers[winner][Math.floor(Math.random() * 3)];
@@ -1354,9 +1354,9 @@
                 const avgScore = (venueData.avgFirstInnings + venueData.avgSecondInnings) / 2;
                 const weatherAdjustment = {
                     'Clear': 0,
-                    'Cloudy': -5,
-                    'Light Rain': -15,
-                    'Hot and Humid': -5
+                    'Cloudy': -7,
+                    'Light Rain': -11,
+                    'Hot and Humid': -3
                 }[weather];
                 
                 const expectedAvg = avgScore + weatherAdjustment;
