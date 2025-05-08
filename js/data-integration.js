@@ -81,6 +81,11 @@ function updateUIElements(pslData) {
         window.showMatchDetails(selectedButton.dataset.matchId);
     }
     
+    // Update points table if the function exists
+    if (typeof window.updatePointsTable === 'function') {
+        window.updatePointsTable();
+    }
+    
     // Update social media highlights with latest news
     updateSocialMediaHighlights(pslData);
     

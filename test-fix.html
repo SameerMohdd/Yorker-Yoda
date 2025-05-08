@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yorker Yoda - Test Fix</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2B6735;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            background: #B27F35;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .match-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .match-item {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            border-left: 4px solid #2B6735;
+        }
+        .match-item-header {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        .match-item-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .match-item-team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .match-item-logo {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .match-item-logo img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .match-item-name {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: capitalize;
+            color: #2B6735;
+        }
+        .match-item-vs {
+            font-size: 14px;
+            font-weight: bold;
+            color: #B27F35;
+        }
+        .match-item-footer {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #2B6735;
+            font-weight: bold;
+        }
+        #status {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid #B27F35;
+        }
+        .points-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .points-table th,
+        .points-table td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .points-table th {
+            background-color: #2B6735;
+            color: white;
+        }
+        .points-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .team-logo {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .team-name {
+            text-align: left;
+            font-weight: bold;
+            color: #2B6735;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #eee;
+            border-radius: 50%;
+            border-top-color: #B27F35;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Yorker Yoda - Testing Fix for Upcoming Matches</h1>
+    
+    <div class="container">
+        <h2>Controls</h2>
+        <button id="load-hardcoded-btn">Load Hardcoded Data</button>
+        <button id="use-improved-btn">Use Improved Functions</button>
+        <button id="test-functions-btn">Test Date Functions</button>
+        <button id="fix-all-btn">Apply All Fixes</button>
+    </div>
+    
+    <div class="container">
+        <h2>Upcoming Matches</h2>
+        <div id="upcoming-matches" class="match-list">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Loading matches...</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>Points Table</h2>
+        <table class="points-table">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>M</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>NR</th>
+                    <th>Pts</th>
+                    <th>NRR</th>
+                </tr>
+            </thead>
+            <tbody id="points-table-body">
+                <!-- Points table will be populated here -->
+                <tr>
+                    <td colspan="7" class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading points table...</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div id="status"></div>
+    
+    <!-- Load core scripts -->
+    <script src="js/default-data.js"></script>
+    <script src="js/hardcoded-updates.js"></script>
+    <script src="js/match-helper.js"></script>
+    
+    <script>
+        // Initialize global variables for testing
+        window.pslData = {};
+        window.allMatches = {};
+        
+        // Status logging function
+        function logStatus(message) {
+            const statusEl = document.getElementById('status');
+            const timestamp = new Date().toLocaleTimeString();
+            statusEl.innerHTML += `<p><strong>[${timestamp}]</strong> ${message}</p>`;
+        }
+        
+        // Initialize with default data
+        function initializeDefaultData() {
+            if (window.DEFAULT_PSL_DATA) {
+                window.pslData = {
+                    teams: window.DEFAULT_PSL_DATA.teams,
+                    headToHead: window.DEFAULT_PSL_DATA.headToHead,
+                    venues: window.DEFAULT_PSL_DATA.venues
+                };
+                
+                window.allMatches = window.DEFAULT_PSL_DATA.matches;
+                
+                logStatus("Initialized with default data");
+                return true;
+            } else {
+                logStatus("ERROR: Default PSL data not found");
+                return false;
+            }
+        }
+        
+        // Apply hardcoded updates
+        function applyHardcodedUpdates() {
+            if (window.hardcodedUpdates && typeof window.hardcodedUpdates.applyUpdates === 'function') {
+                try {
+                    const baseData = window.DEFAULT_PSL_DATA;
+                    const updatedData = window.hardcodedUpdates.applyUpdates(baseData);
+                    
+                    window.pslData = {
+                        teams: updatedData.teams,
+                        headToHead: updatedData.headToHead,
+                        venues: updatedData.venues
+                    };
+                    
+                    window.allMatches = updatedData.matches;
+                    
+                    logStatus("Applied hardcoded updates successfully");
+                    return true;
+                } catch (error) {
+                    logStatus(`ERROR: ${error.message}`);
+                    return false;
+                }
+            } else {
+                logStatus("ERROR: Hardcoded updates module not found");
+                return false;
+            }
+        }
+        
+        // Test date functions
+        function testDateFunctions() {
+            logStatus("Testing date functions...");
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            logStatus(`Today (start of day): ${today.toISOString()}`);
+            
+            // Test match dates
+            if (window.allMatches) {
+                for (const [key, match] of Object.entries(window.allMatches)) {
+                    const matchDate = new Date(match.date);
+                    const isUpcoming = matchDate >= today;
+                    
+                    logStatus(`Match ${key}: Date ${match.date} (${matchDate.toISOString()}) - Is upcoming: ${isUpcoming}`);
+                }
+            } else {
+                logStatus("No matches data available for testing dates");
+            }
+            
+            // Test improved function if available
+            if (window.matchHelper && typeof window.matchHelper.getUpcomingMatches === 'function') {
+                const upcomingMatches = window.matchHelper.getUpcomingMatches();
+                logStatus(`Improved function found ${Object.keys(upcomingMatches).length} upcoming matches`);
+            }
+        }
+        
+        // Display upcoming matches
+        function displayUpcomingMatches() {
+            const container = document.getElementById('upcoming-matches');
+            
+            // Use improved function if available
+            let upcomingMatches = {};
+            if (window.matchHelper && typeof window.matchHelper.getUpcomingMatches === 'function') {
+                upcomingMatches = window.matchHelper.getUpcomingMatches();
+                logStatus(`Using improved function to get upcoming matches`);
+            } else if (typeof window.getUpcomingMatches === 'function') {
+                upcomingMatches = window.getUpcomingMatches();
+                logStatus(`Using original function to get upcoming matches`);
+            } else {
+                // Fallback implementation
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                if (window.allMatches) {
+                    for (const [key, match] of Object.entries(window.allMatches)) {
+                        const matchDate = new Date(match.date);
+                        if (matchDate >= today) {
+                            upcomingMatches[key] = match;
+                        }
+                    }
+                }
+                
+                logStatus(`Using fallback implementation to get upcoming matches`);
+            }
+            
+            // Check if we have matches to display
+            if (!upcomingMatches || Object.keys(upcomingMatches).length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 20px;">
+                        <p>No upcoming matches found.</p>
+                    </div>
+                `;
+                logStatus("No upcoming matches found to display");
+                return;
+            }
+            
+            // Generate HTML for matches
+            let html = '';
+            let count = 0;
+            
+            for (const [key, match] of Object.entries(upcomingMatches)) {
+                if (count >= 6) break; // Show only 6 upcoming matches
+                
+                try {
+                    const matchDate = new Date(match.date);
+                    const dateStr = matchDate.toLocaleDateString('en-US', { 
+                        weekday: 'short',
+                        month: 'short', 
+                        day: 'numeric',
+                        year: '2-digit'
+                    });
+                    
+                    // Handle team logos safely
+                    let team1Logo = '<div style="width: 40px; height: 40px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 50%;">?</div>';
+                    let team2Logo = '<div style="width: 40px; height: 40px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 50%;">?</div>';
+                    
+                    try {
+                        if (!match.team1.includes('TBA')) {
+                            team1Logo = `<img src="logo/${match.team1.toLowerCase().replace(' ', '_')}.png" alt="${match.team1} Logo" />`;
+                        }
+                        
+                        if (!match.team2.includes('TBA')) {
+                            team2Logo = `<img src="logo/${match.team2.toLowerCase().replace(' ', '_')}.png" alt="${match.team2} Logo" />`;
+                        }
+                    } catch (logoError) {
+                        logStatus(`Error loading team logos: ${logoError.message}`);
+                    }
+                    
+                    // Format match number/title
+                    const matchTitle = key.includes('Match') ? `${key.replace('Match', 'Match ')}` : key;
+                    
+                    html += `
+                        <div class="match-item">
+                            <div class="match-item-header">${dateStr} • ${match.time} • ${match.venue}</div>
+                            <div class="match-item-teams">
+                                <div class="match-item-team">
+                                    <div class="match-item-logo">
+                                        ${team1Logo}
+                                    </div>
+                                    <div class="match-item-name">${match.team1}</div>
+                                </div>
+                                <div class="match-item-vs">VS</div>
+                                <div class="match-item-team">
+                                    <div class="match-item-logo">
+                                        ${team2Logo}
+                                    </div>
+                                    <div class="match-item-name">${match.team2}</div>
+                                </div>
+                            </div>
+                            <div class="match-item-footer">${matchTitle}</div>
+                        </div>
+                    `;
+                    count++;
+                } catch (error) {
+                    logStatus(`Error processing match ${key}: ${error.message}`);
+                }
+            }
+            
+            // Update the container
+            container.innerHTML = html || `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 20px;">
+                    <p>Error displaying upcoming matches.</p>
+                </div>
+            `;
+            
+            logStatus(`Displayed ${count} upcoming matches`);
+        }
+        
+        // Display points table
+        function displayPointsTable() {
+            const tableBody = document.getElementById('points-table-body');
+            
+            // Check if we have team data
+            if (!window.pslData || !window.pslData.teams) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 20px;">
+                            <p>No team data available.</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Convert teams to array and sort by points
+            const teamsArray = Object.entries(window.pslData.teams).map(([name, data]) => ({
+                name,
+                ...data
+            }));
+            
+            teamsArray.sort((a, b) => {
+                if (a.points !== b.points) {
+                    return b.points - a.points;
+                }
+                
+                const nrrA = parseFloat(a.nrr) || 0;
+                const nrrB = parseFloat(b.nrr) || 0;
+                return nrrB - nrrA;
+            });
+            
+            // Generate table rows
+            let html = '';
+            
+            teamsArray.forEach((team, index) => {
+                const nrr = parseFloat(team.nrr) || 0;
+                const nrrClass = nrr >= 0 ? 'color: #2B6735;' : 'color: #d32f2f;';
+                
+                // Format team logo and name
+                let teamLogoHtml = '';
+                try {
+                    teamLogoHtml = `<img src="logo/${team.name.toLowerCase().replace(' ', '_')}.png" alt="${team.name}" class="team-logo" />`;
+                } catch (error) {
+                    // Use fallback if logo can't be loaded
+                    teamLogoHtml = '';
+                }
+                
+                html += `
+                    <tr>
+                        <td class="team-name">${teamLogoHtml}${team.name}</td>
+                        <td>${team.matches || 0}</td>
+                        <td>${team.wins || 0}</td>
+                        <td>${team.losses || 0}</td>
+                        <td>${(team.matches - team.wins - team.losses) || 0}</td>
+                        <td><strong>${team.points || 0}</strong></td>
+                        <td style="${nrrClass}">${team.nrr || '0.000'}</td>
+                    </tr>
+                `;
+            });
+            
+            // Update the table
+            tableBody.innerHTML = html || `
+                <tr>
+                    <td colspan="7" style="text-align: center; padding: 20px;">
+                        <p>Error displaying points table.</p>
+                    </td>
+                </tr>
+            `;
+            
+            logStatus(`Displayed points table with ${teamsArray.length} teams`);
+        }
+        
+        // Apply all fixes
+        function applyAllFixes() {
+            logStatus("Applying all fixes...");
+            
+            // Initialize with default data if needed
+            if (!window.pslData || !window.pslData.teams) {
+                initializeDefaultData();
+            }
+            
+            // Apply hardcoded updates
+            applyHardcodedUpdates();
+            
+            // Use improved functions if available
+            if (window.matchHelper) {
+                if (typeof window.matchHelper.fixData === 'function') {
+                    window.matchHelper.fixData();
+                    logStatus("Applied matchHelper fixData function");
+                }
+            }
+            
+            // Update displays
+            displayUpcomingMatches();
+            displayPointsTable();
+            
+            logStatus("All fixes have been applied");
+        }
+        
+        // Set up event listeners
+        document.getElementById('load-hardcoded-btn').addEventListener('click', function() {
+            if (applyHardcodedUpdates()) {
+                displayUpcomingMatches();
+                displayPointsTable();
+            }
+        });
+        
+        document.getElementById('use-improved-btn').addEventListener('click', function() {
+            if (window.matchHelper) {
+                logStatus("Using improved functions from matchHelper");
+                displayUpcomingMatches();
+            } else {
+                logStatus("ERROR: matchHelper module not found");
+            }
+        });
+        
+        document.getElementById('test-functions-btn').addEventListener('click', testDateFunctions);
+        
+        document.getElementById('fix-all-btn').addEventListener('click', applyAllFixes);
+        
+        // Initialize the page
+        window.addEventListener('DOMContentLoaded', function() {
+            logStatus("Page loaded. Initializing test page...");
+            
+            // Initialize with default data
+            initializeDefaultData();
+            
+            // Display initial data
+            displayUpcomingMatches();
+            displayPointsTable();
+            
+            logStatus("Test page initialized. Use the buttons above to test different fixes.");
+        });
+    </script>
+</body>
+</html>

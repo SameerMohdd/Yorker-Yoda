@@ -39,7 +39,6 @@
             gap: 20px;
             position: relative;
             z-index: 2;
-            left: -40px;
         }
         .cricket-icons {
             position: absolute;
@@ -686,6 +685,103 @@
             color: #d32f2f;
         }
         
+        /* Points Table Styles */
+        .points-table-container {
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+        
+        .points-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        
+        .points-table th, 
+        .points-table td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .points-table th {
+            background-color: #2B6735;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .points-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .points-table tr:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .points-table tr.playoff-position {
+            background-color: rgba(43, 103, 53, 0.1);
+        }
+        
+        .points-table td:first-child {
+            text-align: left;
+            font-weight: bold;
+            color: #2B6735;
+        }
+        
+        .points-table td.nrr-positive {
+            color: #2B6735;
+        }
+        
+        .points-table td.nrr-negative {
+            color: #d32f2f;
+        }
+        
+        .points-table-team-logo {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .points-table-legend {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        
+        .points-table-legend p {
+            margin: 5px 0;
+        }
+        
+        .table-form-indicator {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 16px;
+            font-weight: bold;
+            font-size: 10px;
+            margin: 0 1px;
+        }
+        
+        .table-form-indicator.win {
+            background-color: #2B6735;
+        }
+        
+        .table-form-indicator.loss {
+            background-color: #d32f2f;
+        }
+        
+        .table-form-indicator.no-result {
+            background-color: #666;
+        }
+        
         @media (max-width: 768px) {
             .form-tables {
                 grid-template-columns: 1fr;
@@ -698,6 +794,12 @@
             .tab-button {
                 flex: 1;
                 min-width: 120px;
+            }
+            
+            .points-table th, 
+            .points-table td {
+                padding: 8px 5px;
+                font-size: 12px;
             }
         }
         
@@ -771,7 +873,9 @@
       </div>
 
         <div class="match-selector">
-            <h3 style="color: #2B6735; margin-bottom: 15px;">Upcoming Matches</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="color: #2B6735; margin: 0;">Upcoming Matches</h3>
+            </div>
             <div id="quick-match-buttons" class="match-buttons">
                 <!-- Upcoming match buttons will be populated here -->
             </div>
@@ -812,6 +916,7 @@
                     <button class="tab-button active" data-tab="key-factors">Key Factors</button>
                     <button class="tab-button" data-tab="venue-analysis">Venue Analysis</button>
                     <button class="tab-button" data-tab="current-form">Current Form</button>
+                    <button class="tab-button" data-tab="points-table">Points Table</button>
                 </div>
                 
                 <div class="tab-content active" id="key-factors">
@@ -876,6 +981,33 @@
                             <h4 id="team2-form-title">Team 2 - Recent Form</h4>
                             <div id="team2-recent-form"></div>
                         </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="points-table">
+                    <h4>PSL 2025 Points Table</h4>
+                    <div class="points-table-container">
+                        <table class="points-table">
+                            <thead>
+                                <tr>
+                                    <th>Team</th>
+                                    <th>M</th>
+                                    <th>W</th>
+                                    <th>L</th>
+                                    <th>NR</th>
+                                    <th>Pts</th>
+                                    <th>NRR</th>
+                                    <th>Form</th>
+                                </tr>
+                            </thead>
+                            <tbody id="points-table-body">
+                                <!-- Table data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="points-table-legend">
+                        <p>M: Matches | W: Wins | L: Losses | NR: No Result | Pts: Points | NRR: Net Run Rate</p>
+                        <p>Top 4 teams qualify for playoffs</p>
                     </div>
                 </div>
             </div>
@@ -1085,20 +1217,56 @@
             today.setHours(0, 0, 0, 0);
             return today;
         }
+        
+        // Function to properly compare match dates with today
+        function isDateInFuture(matchDateStr) {
+            if (!matchDateStr) return false;
+            
+            try {
+                const matchDate = new Date(matchDateStr);
+                const today = getTodayStart();
+                
+                // Debug date comparison if in debug mode
+                if (window.debugLogger && window.debugLogger.isEnabled && window.debugLogger.isEnabled()) {
+                    console.log(`Date comparison: Match date ${matchDate.toISOString()} vs Today ${today.toISOString()}`);
+                }
+                
+                return matchDate >= today;
+            } catch (error) {
+                console.error("Error comparing dates:", error);
+                return false;
+            }
+        }
 
         // Function to get upcoming matches
         function getUpcomingMatches() {
-            const today = getTodayStart();
             const upcomingMatches = {};
             
-            for (const [key, match] of Object.entries(allMatches)) {
-                const matchDate = new Date(match.date);
-                if (matchDate >= today) {
-                    upcomingMatches[key] = match;
-                }
+            // Check if allMatches exists
+            if (!allMatches || typeof allMatches !== 'object') {
+                console.error("allMatches not properly initialized");
+                return upcomingMatches;
             }
             
-            return upcomingMatches;
+            try {
+                for (const [key, match] of Object.entries(allMatches)) {
+                    // Use our improved date comparison function
+                    if (isDateInFuture(match.date)) {
+                        upcomingMatches[key] = match;
+                    }
+                }
+                
+                if (Object.keys(upcomingMatches).length === 0) {
+                    console.warn("No upcoming matches found. Using all matches as fallback.");
+                    // If no upcoming matches found, return all matches as fallback
+                    return allMatches;
+                }
+                
+                return upcomingMatches;
+            } catch (error) {
+                console.error("Error getting upcoming matches:", error);
+                return allMatches; // Return all matches as fallback
+            }
         }
 
         // Function to populate match buttons
@@ -1136,13 +1304,21 @@
                 button.dataset.matchId = key;
                 
                 // Create team icons
-                const team1Icon = match.team1.includes('TBA') ? 
-                    '' : 
-                    `<img src="logo/${match.team1.toLowerCase().replace(' ', '_')}.png" alt="${match.team1}" class="team-icon">`;
+                // Create team icons (with proper error handling)
+                let team1Icon = '';
+                let team2Icon = '';
                 
-                const team2Icon = match.team2.includes('TBA') ?
-                    '' :
-                    `<img src="logo/${match.team2.toLowerCase().replace(' ', '_')}.png" alt="${match.team2}" class="team-icon">`;
+                try {
+                    if (!match.team1.includes('TBA')) {
+                        team1Icon = `<img src="logo/${match.team1.toLowerCase().replace(' ', '_')}.png" alt="${match.team1}" class="team-icon">`;
+                    }
+                    
+                    if (!match.team2.includes('TBA')) {
+                        team2Icon = `<img src="logo/${match.team2.toLowerCase().replace(' ', '_')}.png" alt="${match.team2}" class="team-icon">`;
+                    }
+                } catch (error) {
+                    console.error("Error creating team icons:", error);
+                }
                 
                 button.innerHTML = `
                     <div>
@@ -1188,16 +1364,14 @@
                     year: '2-digit'
                 });
 
-                console.log(match.team1.toLowerCase().replace(' ', '_'));
-                
                 // Check if teams are TBA
                 const team1Logo = match.team1.includes('TBA') ? 
                     '<img src="/api/placeholder/40/40" alt="TBA" />' : 
-                    `<img src="logo/${(match.team1.toLowerCase()).replace(' ', '_')}.png" alt="${match.team1} Logo" />`;
+                    `<img src="logo/${match.team1.toLowerCase().replace(' ', '_')}.png" alt="${match.team1} Logo" />`;
                 
                 const team2Logo = match.team2.includes('TBA') ?
                     '<img src="/api/placeholder/40/40" alt="TBA" />' :
-                    `<img src="logo/${(match.team2.toLowerCase()).replace(' ', '_')}.png" alt="${match.team2} Logo" />`;
+                    `<img src="logo/${match.team2.toLowerCase().replace(' ', '_')}.png" alt="${match.team2} Logo" />`;
                 
                 // Format match number/title
                 const matchTitle = key.includes('Match') ? `${key.replace('Match', 'Match ')}`  : key;
@@ -1253,8 +1427,18 @@
             const team1Logo = document.getElementById('team1-logo');
             const team2Logo = document.getElementById('team2-logo');
             
-            team1Logo.innerHTML = `<img src="logo/${match.team1.toLowerCase().replace(' ', '_')}.png" alt="${match.team1}">`;
-            team2Logo.innerHTML = `<img src="logo/${match.team2.toLowerCase().replace(' ', '_')}.png" alt="${match.team2}">`;
+            // Handle TBA teams or regular teams
+            if (match.team1.includes('TBA')) {
+                team1Logo.innerHTML = `<img src="/api/placeholder/100/100" alt="TBA">`;
+            } else {
+                team1Logo.innerHTML = `<img src="logo/${match.team1.toLowerCase().replace(' ', '_')}.png" alt="${match.team1}">`;
+            }
+            
+            if (match.team2.includes('TBA')) {
+                team2Logo.innerHTML = `<img src="/api/placeholder/100/100" alt="TBA">`;
+            } else {
+                team2Logo.innerHTML = `<img src="logo/${match.team2.toLowerCase().replace(' ', '_')}.png" alt="${match.team2}">`;
+            }
             
             team1Logo.className = 'team-logo';
             team2Logo.className = 'team-logo';
@@ -2015,13 +2199,95 @@
 
             document.getElementById('team1-recent-form').innerHTML = team1FormHtml;
             document.getElementById('team2-recent-form').innerHTML = team2FormHtml;
+            
+            // Update Points Table tab
+            updatePointsTable();
 
             // Update additional match data
             updateAdditionalMatchData(team1, team2, venue);
         }
+        
+        // Function to update the points table
+        function updatePointsTable() {
+            const pointsTableBody = document.getElementById('points-table-body');
+            if (!pointsTableBody) return;
+            
+            // Clear existing rows
+            pointsTableBody.innerHTML = '';
+            
+            // Get all teams data
+            const teams = pslData.teams;
+            if (!teams) return;
+            
+            // Convert teams object to array for sorting
+            const teamsArray = Object.entries(teams).map(([name, data]) => ({
+                name,
+                ...data
+            }));
+            
+            // Sort teams by points, then by NRR
+            teamsArray.sort((a, b) => {
+                if (a.points !== b.points) {
+                    return b.points - a.points;
+                }
+                
+                // Convert NRR strings to numbers for proper comparison
+                const nrrA = parseFloat(a.nrr) || 0;
+                const nrrB = parseFloat(b.nrr) || 0;
+                
+                return nrrB - nrrA;
+            });
+            
+            // Create a row for each team
+            teamsArray.forEach((team, index) => {
+                const row = document.createElement('tr');
+                
+                // Add playoff position class for top 4 teams
+                if (index < 4) {
+                    row.classList.add('playoff-position');
+                }
+                
+                // Convert NRR string to number
+                const nrr = parseFloat(team.nrr) || 0;
+                const nrrClass = nrr >= 0 ? 'nrr-positive' : 'nrr-negative';
+                
+                // Format the team logo and name
+                const teamLogo = `<img src="logo/${team.name.toLowerCase().replace(' ', '_')}.png" alt="${team.name}" class="points-table-team-logo" />`;
+                
+                // Format the form icons for the last 5 matches
+                let formHtml = '';
+                const formData = team.form ? team.form.slice(-5) : '';
+                
+                for (let i = 0; i < formData.length; i++) {
+                    const result = formData[i];
+                    if (result === 'W') {
+                        formHtml += `<span class="table-form-indicator win" title="Win">W</span>`;
+                    } else if (result === 'L') {
+                        formHtml += `<span class="table-form-indicator loss" title="Loss">L</span>`;
+                    } else if (result === 'N') {
+                        formHtml += `<span class="table-form-indicator no-result" title="No Result">N</span>`;
+                    }
+                }
+                
+                // Create the row HTML
+                row.innerHTML = `
+                    <td>${teamLogo}${team.name}</td>
+                    <td>${team.matches || 0}</td>
+                    <td>${team.wins || 0}</td>
+                    <td>${team.losses || 0}</td>
+                    <td>${(team.matches - team.wins - team.losses) || 0}</td>
+                    <td>${team.points || 0}</td>
+                    <td class="${nrrClass}">${team.nrr || '0.000'}</td>
+                    <td>${formHtml}</td>
+                `;
+                
+                pointsTableBody.appendChild(row);
+            });
+        }
 
         // Initialize when page loads
         window.onload = function() {
+            // First, try to populate matches
             populateMatchSelector();
             populateUpcomingMatches();
             
@@ -2035,6 +2301,65 @@
                     alert('Please select a match first!');
                 }
             });
+            
+            // Initialize the points table
+            updatePointsTable();
+            
+            // Check if the match buttons are populated
+            const matchButtons = document.getElementById('quick-match-buttons');
+            if (matchButtons && (!matchButtons.children || matchButtons.children.length === 0)) {
+                console.warn("No match buttons were generated on initial load - showing fix button");
+                
+                // Show the fix data button
+                const fixDataBtn = document.getElementById('fix-data-btn');
+                if (fixDataBtn) {
+                    fixDataBtn.style.display = 'block';
+                    
+                    // Add event listener to the fix button
+                    fixDataBtn.addEventListener('click', function() {
+                        // Apply hardcoded updates
+                        if (window.hardcodedUpdates && typeof window.hardcodedUpdates.applyUpdates === 'function') {
+                            try {
+                                // Get base data or use default
+                                const baseData = window.pslDataFetcher && typeof window.pslDataFetcher.getCachedData === 'function' ?
+                                    window.pslDataFetcher.getCachedData() : window.DEFAULT_PSL_DATA;
+                                
+                                // Apply hardcoded updates
+                                const updatedData = window.hardcodedUpdates.applyUpdates(baseData);
+                                
+                                // Manually update global objects
+                                window.pslData = {
+                                    teams: updatedData.teams,
+                                    headToHead: updatedData.headToHead,
+                                    venues: updatedData.venues
+                                };
+                                
+                                window.allMatches = updatedData.matches;
+                                
+                                // Re-populate UI
+                                populateMatchSelector();
+                                populateUpcomingMatches();
+                                updatePointsTable();
+                                
+                                // Try to use the debugLogger's fix function if available
+                                if (window.debugLogger && typeof window.debugLogger.fixDataIssues === 'function') {
+                                    window.debugLogger.fixDataIssues();
+                                }
+                                
+                                // Hide the button after fixing
+                                this.style.display = 'none';
+                                
+                                alert("Data has been updated successfully! Upcoming matches should now appear.");
+                            } catch (error) {
+                                console.error("Error fixing data:", error);
+                                alert("There was an error fixing the data. Please try refreshing the page.");
+                            }
+                        } else {
+                            alert("Required data fixing modules not available. Please refresh the page.");
+                        }
+                    });
+                }
+            }
         };
     </script>
 
@@ -2045,7 +2370,7 @@
     <script src="js/hardcoded-updates.js"></script>
     <script src="js/direct-scraper.js"></script>
     <script src="js/data-fetcher.js"></script>
-    <script src="js/data-integration.js"></script>
+    <script src="js/data-integration.js"></script>\n    <script src="js/match-helper.js"></script>
     
     <!-- Script to initialize data fetching on page load -->
     <script>
@@ -2107,7 +2432,7 @@
                 
                 // Add use hardcoded data button
                 const useHardcodedButton = document.createElement('button');
-                useHardcodedButton.textContent = 'Use May 8th Data';
+                useHardcodedButton.textContent = 'Use Most recent Data';
                 useHardcodedButton.style.marginLeft = '10px';
                 useHardcodedButton.style.padding = '3px 8px';
                 useHardcodedButton.style.backgroundColor = '#d32f2f';

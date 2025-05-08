@@ -326,10 +326,88 @@ function inspectData() {
     }
 }
 
+// Function to specifically debug the upcoming matches
+function debugUpcomingMatches() {
+    console.log("--- DEBUGGING UPCOMING MATCHES ---");
+    
+    // Check if getUpcomingMatches function exists
+    if (typeof window.getUpcomingMatches === 'function') {
+        const upcomingMatches = window.getUpcomingMatches();
+        console.log("Upcoming matches from function:", upcomingMatches);
+        console.log("Number of upcoming matches:", Object.keys(upcomingMatches).length);
+        
+        if (Object.keys(upcomingMatches).length === 0) {
+            console.warn("No upcoming matches found. This could be why no matches are displayed.");
+        }
+        
+        // Check today's date
+        const today = new Date();
+        console.log("Current date:", today.toISOString());
+        
+        // Debug match dates
+        if (window.allMatches) {
+            for (const [key, match] of Object.entries(window.allMatches)) {
+                const matchDate = new Date(match.date);
+                console.log(`Match: ${key}, Date: ${match.date}, Is future date: ${matchDate >= today}`);
+            }
+        }
+    } else {
+        console.error("getUpcomingMatches function not found");
+    }
+    
+    // Debug DOM elements
+    const matchButtonsContainer = document.getElementById('quick-match-buttons');
+    console.log("Match buttons container:", matchButtonsContainer);
+    
+    const upcomingMatchesList = document.getElementById('upcoming-matches-list');
+    console.log("Upcoming matches list container:", upcomingMatchesList);
+}
+
+// Function to fix common data issues
+function fixDataIssues() {
+    console.log("Attempting to fix common data issues...");
+    
+    // Fix 1: Ensure allMatches is properly initialized
+    if (!window.allMatches || Object.keys(window.allMatches).length === 0) {
+        console.log("Fixing missing allMatches data...");
+        
+        // Use hardcoded matches if available
+        if (window.hardcodedUpdates && window.hardcodedUpdates.matches) {
+            window.allMatches = window.hardcodedUpdates.matches;
+            console.log("Applied hardcoded matches data");
+        } else if (window.DEFAULT_PSL_DATA && window.DEFAULT_PSL_DATA.matches) {
+            window.allMatches = window.DEFAULT_PSL_DATA.matches;
+            console.log("Applied default matches data");
+        }
+    }
+    
+    // Fix 2: Force repopulation of UI
+    if (typeof window.populateMatchSelector === 'function') {
+        window.populateMatchSelector();
+        console.log("Repopulated match selector");
+    }
+    
+    if (typeof window.populateUpcomingMatches === 'function') {
+        window.populateUpcomingMatches();
+        console.log("Repopulated upcoming matches");
+    }
+    
+    console.log("Fix attempt completed");
+    
+    // Return status for logging
+    return {
+        allMatchesFixed: window.allMatches && Object.keys(window.allMatches).length > 0,
+        upcomingMatchesCount: typeof window.getUpcomingMatches === 'function' ? 
+            Object.keys(window.getUpcomingMatches()).length : 'unknown'
+    };
+}
+
 // Export debug functions to global scope
 window.debugLogger = {
     init: initDebugLogger,
     inspectData: inspectData,
+    debugUpcomingMatches: debugUpcomingMatches,
+    fixDataIssues: fixDataIssues,
     isEnabled: () => debugMode
 };
 

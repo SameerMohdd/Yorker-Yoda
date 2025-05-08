@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yorker Yoda Fix Instructions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #2B6735;
+        }
+        .steps {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-left: 4px solid #B27F35;
+            margin-bottom: 20px;
+        }
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .button {
+            display: inline-block;
+            background-color: #B27F35;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .note {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Yorker Yoda - Fix Instructions (Simple Version)</h1>
+    <p>Follow these instructions to fix the "No upcoming matches" issue in your Yorker Yoda application.</p>
+    
+    <div class="note">
+        <strong>Note:</strong> This version includes only the essential fixes without adding any UI buttons or visual elements.
+    </div>
+    
+    <div class="steps">
+        <h2>Step 1: Include the match-helper-simple.js file</h2>
+        <p>Open your <code>index.html</code> file and locate the section where JavaScript files are included (near the bottom of the file). Add the following line after the data-integration.js script:</p>
+        
+        <pre>&lt;script src="js/match-helper-simple.js"&gt;&lt;/script&gt;</pre>
+        
+        <p>This new script has been created in the js directory and contains fixes for the upcoming matches display.</p>
+    </div>
+    
+    <div class="steps">
+        <h2>Step 2: Test the application</h2>
+        <p>Reload the Yorker Yoda application in your browser. The upcoming matches should now be displayed correctly.</p>
+    </div>
+    
+    <div class="steps">
+        <h2>Step 3: Debug Mode (Optional)</h2>
+        <p>If you want to see detailed debugging information, add <code>?debug=true</code> to the end of your URL, for example:</p>
+        <pre>http://localhost:8080/index.html?debug=true</pre>
+        <p>This will display a debug console that shows information about data loading and match processing.</p>
+    </div>
+    
+    <h2>What's been fixed:</h2>
+    <ul>
+        <li>Improved date comparison for upcoming matches</li>
+        <li>Better error handling for match display</li>
+        <li>Fallback mechanisms when data is missing</li>
+        <li>Added the Points Table in the Analysis Breakdown section</li>
+        <li>Improved handling of TBA (To Be Announced) teams in matches</li>
+    </ul>
+    
+    <a href="index.html" class="button">Return to Yorker Yoda</a>
+</body>
+</html>
