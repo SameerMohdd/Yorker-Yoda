@@ -700,6 +700,38 @@
                 min-width: 120px;
             }
         }
+        
+        /* Form indicators for recent team performance */
+        #recent-form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .form-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            font-weight: bold;
+            font-size: 12px;
+            margin: 0 2px;
+        }
+        
+        .form-indicator.win {
+            background-color: #2B6735;
+        }
+        
+        .form-indicator.loss {
+            background-color: #d32f2f;
+        }
+        
+        .form-indicator.no-result {
+            background-color: #666;
+        }
 </style>
 </head>
 <body>
@@ -713,7 +745,7 @@
               </div>
               <div>
                 <h1>Winning Yoda</h1>
-                <p class="tagline">PSL Match Predictor</p>
+                <p class="tagline">PSL Match Predictor <span style="font-size: 10px; color: #eee;"></span></p>
               </div>
             </div>
           </header>
@@ -722,20 +754,16 @@
           <div class="news-ticker">
             <div class="ticker-wrap">
               <div class="ticker-content">
-                BREAKING: Zalmi keep playoff hopes alive after crushing Sultans by 7 Wicket in one sided contest • 
-                Karachi Kings beat Lahore Qalandars by 4 wickets, Irfan the hero as Kings ace tense 15-over chase • 
+                BREAKING: 📊 POINTS TABLE UPDATED WITH LATEST DATA AS OF MAY 8, 2025 • 
+                Quetta Gladiators (13 pts) lead the table after win against Multan Sultans • 
+                Karachi Kings and Islamabad United tied on 10 points • 
+                Lahore Qalandars (9 pts) and Peshawar Zalmi (8 pts) still in playoff contention • 
+                Quetta Gladiators beat Multan Sultans by 10 wickets to secure top spot • 
+                Peshawar Zalmi keep playoff hopes alive after crushing Sultans by 7 wickets • 
                 Quetta Gladiators beat Islamabad United by 2 wickets in a thrilling last-over finish • 
-                Peshawar Zalmi defeat Islamabad United by 6 wickets to keep playoff hopes alive •  
+                Karachi Kings beat Lahore Qalandars by 4 wickets, Irfan the hero as Kings ace the chase • 
                 PSL confirms final to be held at Gaddafi Stadium on May 18 as scheduled •
-                PSL X trophy 'Luminara' unveiled, adorned with over 22,000 zircon stones •
-                Babar Azam reaches 2000 runs in PSL history, becomes fastest to milestone •
-                Shadab Khan takes 100th PSL wicket, third bowler to achieve feat •
-                BREAKING: Zalmi keep playoff hopes alive after crushing Sultans by 7 Wicket in one sided contest • 
-                Karachi Kings beat Lahore Qalandars by 4 wickets, Irfan the hero as Kings ace tense 15-over chase •
-                Quetta Gladiators beat Islamabad United by 2 wickets in a thrilling last-over finish • 
-                Peshawar Zalmi defeat Islamabad United by 6 wickets to keep playoff hopes alive • 
-                PSL confirms final to be held at Gaddafi Stadium on May 18 as scheduled •
-                PSL X trophy 'Luminara' unveiled, adorned with over 22,000 zircon stones
+                Zalmi vs Kings tonight in crucial match with playoff implications
               </div>
             </div>
           </div>
@@ -746,6 +774,12 @@
             <h3 style="color: #2B6735; margin-bottom: 15px;">Upcoming Matches</h3>
             <div id="quick-match-buttons" class="match-buttons">
                 <!-- Upcoming match buttons will be populated here -->
+            </div>
+        </div>
+        
+        <div class="upcoming-matches" style="display: none;">
+            <div id="upcoming-matches-list" class="match-list">
+                <!-- Upcoming matches will be displayed here -->
             </div>
         </div>
 
@@ -802,7 +836,7 @@
                             </tr>
                             <tr>
                                 <td class="factor-label">Recent Form (Last 5 matches)</td>
-                                <td id="recent-form"></td>
+                                <td id="recent-form"><span style="color: #B27F35;"></span></td>
                             </tr>
                             <tr>
                                 <td class="factor-label">Key Players Availability</td>
@@ -1606,10 +1640,16 @@
                 team2Wins: 12,
                 noResult: 0
             },
-            "Quetta Gladiators-Multan Sultans": {
+            "Islamabad United-Karachi Kings": {
+                matches: 23,
+                team1Wins: 17,
+                team2Wins: 6,
+                noResult: 0
+            },
+            "Multan Sultans-Quetta Gladiators": {
                 matches: 13,
-                team1Wins: 4,
-                team2Wins: 9,
+                team1Wins: 9,
+                team2Wins: 4,
                 noResult: 0
             }
         };
@@ -1618,93 +1658,115 @@
         const pslData = {
             teams: {
                 "Islamabad United": {
-                    matches: 8,
-                    wins: 6,
-                    losses: 2,
-                    points: 12,
-                    nrr: "+1.285",
-                    form: "WWWWWLLW",
+                    matches: 9,
+                    wins: 5,
+                    losses: 4,
+                    points: 10,
+                    nrr: "-0.044",
+                    form: "WWWWWLLLL",
                     recentMatches: [
+                        { opponent: "Quetta Gladiators", result: "Lost by 109 Runs", date: "2025-05-07" },
+                        { opponent: "Quetta Gladiators", result: "Lost by 2 wickets", date: "2025-05-03" },
                         { opponent: "Peshawar Zalmi", result: "Lost by 6 wickets", date: "2025-05-02" },
                         { opponent: "Lahore Qalandars", result: "Lost by 88 runs", date: "2025-04-30" },
-                        { opponent: "Lahore Qalandars", result: "Lost by 5 wickets", date: "2025-04-26" },
                         { opponent: "Multan Sultans", result: "Won by 7 wickets", date: "2025-04-23" },
-                        { opponent: "Karachi Kings", result: "Won by 6 wickets", date: "2025-04-20" }
+                        { opponent: "Karachi Kings", result: "Won by 6 wickets", date: "2025-04-20" },
+                        { opponent: "Multan Sultans", result: "Won by by 47 runs", date: "2025-04-16" },
+                        { opponent: "Peshawar Zalmi", result: "Won by 102 runs", date: "2025-04-14" },
+                        { opponent: "Lahore Qalandars", result: "Won by 8 wickets", date: "2025-04-11" }
                     ]
                 },
                 "Lahore Qalandars": {
-                    matches: 8,
-                    wins: 5,
-                    losses: 2,
-                    points: 11,
-                    nrr: "+0.635",
-                    form: "WLWWWLW",
+                    matches: 9,
+                    wins: 4,
+                    losses: 4,
+                    points: 9,
+                    nrr: "+0.958",
+                    form: "LWWLLWWNRL",
                     recentMatches: [
+                        { opponent: "Karachi Kings", result: "Lost by 4 wickets", date: "2025-05-01" },
                         { opponent: "Quetta Gladiators", result: "No result (Rain)", date: "2025-05-01" },
                         { opponent: "Islamabad United", result: "Won by 88 runs", date: "2025-04-30" },
                         { opponent: "Islamabad United", result: "Won by 5 wickets", date: "2025-04-26" },
                         { opponent: "Peshawar Zalmi", result: "Lost by 7 wickets", date: "2025-04-24" },
-                        { opponent: "Multan Sultans", result: "Lost by 33 runs", date: "2025-04-22" }
+                        { opponent: "Multan Sultans", result: "Lost by 33 runs", date: "2025-04-22" },
+                        { opponent: "Karachi KIngs", result: "Won by 65 runs", date: "2025-04-15" },
+                        { opponent: "Quetta Gladiators", result: "Won by 79 Runs", date: "2025-04-13" },
+                        { opponent: "Islamabad United", result: "Lost by 8 wickets", date: "2025-04-11" }
                     ]
                 },
                 "Karachi Kings": {
                     matches: 8,
-                    wins: 4,
-                    losses: 4,
-                    points: 8,
-                    nrr: "-0.148",
-                    form: "WLWLWWLW",
+                    wins: 5,
+                    losses: 3,
+                    points: 10,
+                    nrr: "0.433",
+                    form: "WLWLWLWW",
                     recentMatches: [
+                        { opponent: "Lahore Qalandars", result: "Won by 4 Wickets", date: "2025-05-04" },
                         { opponent: "Multan Sultans", result: "Won by 87 runs", date: "2025-05-01" },
                         { opponent: "Quetta Gladiators", result: "Lost by 5 runs", date: "2025-04-25" },
                         { opponent: "Peshawar Zalmi", result: "Won by 2 wickets", date: "2025-04-21" },
                         { opponent: "Islamabad United", result: "Lost by 6 wickets", date: "2025-04-20" },
-                        { opponent: "Quetta Gladiators", result: "Won by 56 runs", date: "2025-04-18" }
+                        { opponent: "Quetta Gladiators", result: "Won by 56 runs", date: "2025-04-18" },
+                        { opponent: "Lahore Qalandars", result: "Lost by 65 runs", date: "2025-04-15" },
+                        { opponent: "Karachi Kings", result: "Won by 4 Wickets", date: "2025-04-12" }
                     ]
                 },
                 "Quetta Gladiators": {
-                    matches: 8,
-                    wins: 4,
-                    losses: 3,
-                    points: 9,
-                    nrr: "+0.245",
-                    form: "LWLWWWW",
+                    matches: 9,
+                    wins: 6,
+                    losses: 2,
+                    points: 13,
+                    nrr: "+1.503",
+                    form: "WLLWWWNWW",
                     recentMatches: [
+                        { opponent: "Islamabad United", result: "Won by 109 runs", date: "2025-05-07" },
+                        { opponent: "Islamabad United", result: "Won by 2 wickets", date: "2025-04-03" },
                         { opponent: "Lahore Qalandars", result: "No result (Rain)", date: "2025-05-01" },
                         { opponent: "Multan Sultans", result: "Won by 10 wickets", date: "2025-04-29" },
                         { opponent: "Peshawar Zalmi", result: "Won by 64 runs", date: "2025-04-27" },
                         { opponent: "Karachi Kings", result: "Won by 5 runs", date: "2025-04-25" },
-                        { opponent: "Karachi Kings", result: "Lost by 56 runs", date: "2025-04-18" }
+                        { opponent: "Karachi Kings", result: "Lost by 56 runs", date: "2025-04-18" },
+                        { opponent: "Lahore Qalandars", result: "Lost by 79 runs", date: "2025-04-13" },
+                        { opponent: "Peshawar Zalmi", result: "Won by 80 runs", date: "2025-04-18" }
                     ]
                 },
                 "Peshawar Zalmi": {
                     matches: 8,
-                    wins: 3,
-                    losses: 5,
-                    points: 6,
-                    nrr: "-0.622",
-                    form: "WLLWLLW",
+                    wins: 4,
+                    losses: 4,
+                    points: 8,
+                    nrr: "-0.082",
+                    form: "LLWLWLWW",
                     recentMatches: [
+                        { opponent: "Multan Sultans", result: "Won by 7 Wickets", date: "2025-05-05" },
                         { opponent: "Islamabad United", result: "Won by 6 wickets", date: "2025-05-02" },
                         { opponent: "Lahore Qalandars", result: "Won by 7 wickets", date: "2025-04-24" },
                         { opponent: "Quetta Gladiators", result: "Lost by 64 runs", date: "2025-04-27" },
                         { opponent: "Karachi Kings", result: "Lost by 2 wickets", date: "2025-04-21" },
-                        { opponent: "Multan Sultans", result: "Won by 120 runs", date: "2025-04-19" }
+                        { opponent: "Multan Sultans", result: "Won by 120 runs", date: "2025-04-19" },
+                        { opponent: "Islamabad United", result: "Lost by 102 runs", date: "2025-04-14" },
+                        { opponent: "Quetta Gladiators", result: "Lost by 80 runs", date: "2025-04-12" },
                     ]
                 },
                 "Multan Sultans": {
-                    matches: 8,
+                    matches: 9,
                     wins: 1,
-                    losses: 7,
+                    losses: 8,
                     points: 2,
-                    nrr: "-1.387",
-                    form: "LLLLWLLL",
+                    nrr: "-2.708",
+                    form: "LLLWLLLLL",
                     recentMatches: [
+                        { opponent: "Peshawar Zalmi", result: "Lost by 7 Wickets", date: "2025-05-05" },
                         { opponent: "Karachi Kings", result: "Lost by 87 runs", date: "2025-05-01" },
                         { opponent: "Quetta Gladiators", result: "Lost by 10 wickets", date: "2025-04-29" },
+                        { opponent: "Lahore Qalandars", result: "Lost by 5 wickets", date: "2025-04-26" },
                         { opponent: "Islamabad United", result: "Lost by 7 wickets", date: "2025-04-23" },
                         { opponent: "Lahore Qalandars", result: "Won by 33 runs", date: "2025-04-22" },
-                        { opponent: "Peshawar Zalmi", result: "Lost by 120 runs", date: "2025-04-19" }
+                        { opponent: "Peshawar Zalmi", result: "Lost by 120 runs", date: "2025-04-19" },
+                        { opponent: "Islamabad United", result: "Lost by 47 runs", date: "2025-04-16" },
+                        { opponent: "Karachi Kings", result: "Lost by 4 Wickets", date: "2025-04-12" }
                     ]
                 }
             },
@@ -1874,7 +1936,41 @@
             document.getElementById('toss-advantage').innerHTML = `<span style="color: #B27F35;">${venueData.winningToss}</span>`;
             document.getElementById('win-percentage').innerHTML = `<span style="color: #2B6735;">${team1}: ${(team1Data.wins/team1Data.matches*100).toFixed(1)}% | ${team2}: ${(team2Data.wins/team2Data.matches*100).toFixed(1)}%</span>`;
             document.getElementById('venue-performance').innerHTML = `<span style="color: #2B6735;">See venue analysis tab for details</span>`;
-            document.getElementById('recent-form').innerHTML = `<span style="color: #B27F35;">${team1}: ${team1Data.form.slice(-5)} | ${team2}: ${team2Data.form.slice(-5)}</span>`;
+            // Update Recent Form section to use form indicators
+            // Get fresh form data if available
+            const team1Form = team1Data.form.slice(-5) || (team1Data.recentMatches || []).map(m => m.result.includes('Won') ? 'W' : 'L').join('');
+            const team2Form = team2Data.form.slice(-5) || (team2Data.recentMatches || []).map(m => m.result.includes('Won') ? 'W' : 'L').join('');
+            
+            let recentFormHtml = '';
+            
+            // Add form indicators for team 1
+            recentFormHtml += `<span>${team1}: </span>`;
+            for (let i = 0; i < team1Form.length; i++) {
+                const result = team1Form[i];
+                if (result === 'W') {
+                    recentFormHtml += `<span class="form-indicator win" title="Win">W</span>`;
+                } else if (result === 'L') {
+                    recentFormHtml += `<span class="form-indicator loss" title="Loss">L</span>`;
+                } else {
+                    recentFormHtml += `<span class="form-indicator no-result" title="No Result">N</span>`;
+                }
+            }
+            
+            recentFormHtml += `&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span>${team2}: </span>`;
+            
+            // Add form indicators for team 2
+            for (let i = 0; i < team2Form.length; i++) {
+                const result = team2Form[i];
+                if (result === 'W') {
+                    recentFormHtml += `<span class="form-indicator win" title="Win">W</span>`;
+                } else if (result === 'L') {
+                    recentFormHtml += `<span class="form-indicator loss" title="Loss">L</span>`;
+                } else {
+                    recentFormHtml += `<span class="form-indicator no-result" title="No Result">N</span>`;
+                }
+            }
+            
+            document.getElementById('recent-form').innerHTML = recentFormHtml;
             document.getElementById('key-players-status').innerHTML = `<span style="color: #2B6735;">All players available unless otherwise noted</span>`;
 
             // Update Venue Analysis tab
@@ -1927,6 +2023,7 @@
         // Initialize when page loads
         window.onload = function() {
             populateMatchSelector();
+            populateUpcomingMatches();
             
             // Add event listener for prediction button
             document.getElementById('predict-btn').addEventListener('click', function() {
@@ -1939,6 +2036,191 @@
                 }
             });
         };
+    </script>
+
+    <!-- PSL Data Fetching and Integration Scripts -->
+    <script src="js/default-data.js"></script>
+    <script src="js/cors-proxy.js"></script>
+    <script src="js/debug-logger.js"></script>
+    <script src="js/hardcoded-updates.js"></script>
+    <script src="js/direct-scraper.js"></script>
+    <script src="js/data-fetcher.js"></script>
+    <script src="js/data-integration.js"></script>
+    
+    <!-- Script to initialize data fetching on page load -->
+    <script>
+        // Run data integration when the page has fully loaded
+        window.addEventListener('load', function() {
+            // Attempt to integrate data
+            if (window.pslDataIntegration && typeof window.pslDataIntegration.integrate === 'function') {
+                console.log("Initializing PSL data fetching and integration...");
+                window.pslDataIntegration.integrate();
+                
+                // Set up regular refresh for long-duration sessions
+                setInterval(function() {
+                    if (window.pslDataIntegration && typeof window.pslDataIntegration.integrate === 'function') {
+                        console.log("Refreshing PSL data...");
+                        window.pslDataIntegration.integrate();
+                    }
+                }, 3600000); // Refresh every hour (3600000 ms)
+            } else {
+                console.error("PSL data integration not available");
+            }
+        });
+        
+        // Add a status indicator to show when data was last fetched
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            if (container) {
+                const statusDiv = document.createElement('div');
+                statusDiv.id = 'data-status';
+                statusDiv.style.textAlign = 'center';
+                statusDiv.style.fontSize = '12px';
+                statusDiv.style.color = '#666';
+                statusDiv.style.padding = '10px';
+                statusDiv.style.marginTop = '20px';
+                statusDiv.style.borderTop = '1px solid #eee';
+                
+                // Add a refresh button to manually force a data refresh
+                const refreshButton = document.createElement('button');
+                refreshButton.textContent = 'Clear Cache & Update';
+                refreshButton.style.marginLeft = '10px';
+                refreshButton.style.padding = '3px 8px';
+                refreshButton.style.backgroundColor = '#2B6735';
+                refreshButton.style.color = 'white';
+                refreshButton.style.border = 'none';
+                refreshButton.style.borderRadius = '3px';
+                refreshButton.style.cursor = 'pointer';
+                refreshButton.style.fontSize = '12px';
+                
+                // Add direct scrape button
+                const directScrapeButton = document.createElement('button');
+                directScrapeButton.textContent = 'Force Direct Scrape';
+                directScrapeButton.style.marginLeft = '10px';
+                directScrapeButton.style.padding = '3px 8px';
+                directScrapeButton.style.backgroundColor = '#B27F35';
+                directScrapeButton.style.color = 'white';
+                directScrapeButton.style.border = 'none';
+                directScrapeButton.style.borderRadius = '3px';
+                directScrapeButton.style.cursor = 'pointer';
+                directScrapeButton.style.fontSize = '12px';
+                
+                // Add use hardcoded data button
+                const useHardcodedButton = document.createElement('button');
+                useHardcodedButton.textContent = 'Use May 8th Data';
+                useHardcodedButton.style.marginLeft = '10px';
+                useHardcodedButton.style.padding = '3px 8px';
+                useHardcodedButton.style.backgroundColor = '#d32f2f';
+                useHardcodedButton.style.color = 'white';
+                useHardcodedButton.style.border = 'none';
+                useHardcodedButton.style.borderRadius = '3px';
+                useHardcodedButton.style.cursor = 'pointer';
+                useHardcodedButton.style.fontSize = '12px';
+                
+                refreshButton.addEventListener('click', function() {
+                    if (window.pslDataFetcher && typeof window.pslDataFetcher.forceRefresh === 'function') {
+                        statusDiv.textContent = 'Refreshing data...';
+                        window.pslDataFetcher.forceRefresh();
+                        if (window.pslDataIntegration && typeof window.pslDataIntegration.integrate === 'function') {
+                            window.pslDataIntegration.integrate();
+                        }
+                    }
+                });
+                
+                directScrapeButton.addEventListener('click', function() {
+                    if (window.directScraper && typeof window.directScraper.scrapePointsTable === 'function') {
+                        statusDiv.textContent = 'Directly scraping latest data...';
+                        window.directScraper.scrapePointsTable().then(pointsTable => {
+                            if (pointsTable && Object.keys(pointsTable).length > 0) {
+                                // Get cached data
+                                const cachedData = window.pslDataFetcher.getCachedData() || window.DEFAULT_PSL_DATA;
+                                
+                                // Update with direct data
+                                window.directScraper.updatePSLData(cachedData).then(updatedData => {
+                                    // Store the updated data
+                                    localStorage.setItem('psl_2025_data', JSON.stringify(updatedData));
+                                    localStorage.setItem('psl_2025_last_fetch', Date.now().toString());
+                                    
+                                    // Integrate the new data
+                                    if (window.pslDataIntegration && typeof window.pslDataIntegration.integrate === 'function') {
+                                        window.pslDataIntegration.integrate();
+                                    }
+                                    
+                                    statusDiv.textContent = 'Data successfully updated via direct scraping!';
+                                    statusDiv.appendChild(refreshButton);
+                                    statusDiv.appendChild(directScrapeButton);
+                                    statusDiv.appendChild(useHardcodedButton);
+                                });
+                            } else {
+                                statusDiv.textContent = 'Direct scraping failed. Please try again later.';
+                                statusDiv.appendChild(refreshButton);
+                                statusDiv.appendChild(directScrapeButton);
+                                statusDiv.appendChild(useHardcodedButton);
+                            }
+                        }).catch(error => {
+                            console.error("Direct scraping error:", error);
+                            statusDiv.textContent = 'Error during direct scraping. Please try again.';
+                            statusDiv.appendChild(refreshButton);
+                            statusDiv.appendChild(directScrapeButton);
+                            statusDiv.appendChild(useHardcodedButton);
+                        });
+                    }
+                });
+                
+                useHardcodedButton.addEventListener('click', function() {
+                    if (window.hardcodedUpdates && typeof window.hardcodedUpdates.applyUpdates === 'function') {
+                        statusDiv.textContent = 'Applying latest May 8th data...';
+                        
+                        try {
+                            // Get base data
+                            const baseData = window.pslDataFetcher.getCachedData() || window.DEFAULT_PSL_DATA;
+                            
+                            // Apply hardcoded updates
+                            const updatedData = window.hardcodedUpdates.applyUpdates(baseData);
+                            
+                            // Store the updated data
+                            localStorage.setItem('psl_2025_data', JSON.stringify(updatedData));
+                            localStorage.setItem('psl_2025_last_fetch', Date.now().toString());
+                            
+                            // Integrate the new data
+                            if (window.pslDataIntegration && typeof window.pslDataIntegration.integrate === 'function') {
+                                window.pslDataIntegration.integrate();
+                            }
+                            
+                            statusDiv.textContent = 'Applied latest May 8th data successfully!';
+                            statusDiv.appendChild(refreshButton);
+                            statusDiv.appendChild(directScrapeButton);
+                            statusDiv.appendChild(useHardcodedButton);
+                        } catch (error) {
+                            console.error("Error applying hardcoded updates:", error);
+                            statusDiv.textContent = 'Error applying May 8th data. Please try again.';
+                            statusDiv.appendChild(refreshButton);
+                            statusDiv.appendChild(directScrapeButton);
+                            statusDiv.appendChild(useHardcodedButton);
+                        }
+                    }
+                });
+                
+                statusDiv.textContent = 'Live data from Cricinfo - Checking for updates...';
+                statusDiv.appendChild(refreshButton);
+                statusDiv.appendChild(directScrapeButton);
+                statusDiv.appendChild(useHardcodedButton);
+                container.appendChild(statusDiv);
+                
+                // Update the status with the last fetch time
+                setInterval(function() {
+                    if (window.pslDataFetcher && typeof window.pslDataFetcher.getLastFetchTime === 'function') {
+                        const lastFetch = window.pslDataFetcher.getLastFetchTime();
+                        if (lastFetch) {
+                            statusDiv.textContent = `Live data from Cricinfo - Last updated: ${lastFetch.toLocaleString()}`;
+                            statusDiv.appendChild(refreshButton);
+                            statusDiv.appendChild(directScrapeButton);
+                            statusDiv.appendChild(useHardcodedButton);
+                        }
+                    }
+                }, 10000); // Check every 10 seconds
+            }
+        });
     </script>
 </body>
 </html>

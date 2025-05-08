@@ -315,20 +315,47 @@
             border-radius: 10px;
             border: 1px solid #B27F35;
         }
-        select {
-            width: 100%;
-            padding: 12px;
+        .match-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        .match-button {
+            background: white;
             border: 2px solid #B27F35;
             border-radius: 8px;
+            padding: 12px 15px;
             font-size: 16px;
-            margin-top: 8px;
-            background: white;
             color: #2B6735;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        select:hover {
+        .match-button:hover {
+            background: rgba(43, 103, 53, 0.1);
             border-color: #2B6735;
+            transform: translateY(-2px);
+        }
+        .match-button.selected {
+            background: rgba(43, 103, 53, 0.2);
+            border-color: #2B6735;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        .match-button-teams {
+            font-weight: bold;
+        }
+        .match-button-details {
+            font-size: 12px;
+            color: #666;
+        }
+        .team-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: contain;
         }
         .predict-btn {
             background: linear-gradient(to right, #B27F35, #8c6428);
@@ -695,18 +722,18 @@
           <div class="news-ticker">
             <div class="ticker-wrap">
               <div class="ticker-content">
-                BREAKING: Quetta Gladiators beat Islamabad United by 2 wickets in a thrilling last-over finish • 
-                Peshawar Zalmi defeat Islamabad United by 6 wickets to keep playoff hopes alive • 
-                Karachi Kings crush Multan Sultans by 87 runs to move up in the points table • 
-                Rain washes out crucial match between Lahore Qalandars and Quetta Gladiators • 
+                BREAKING: Zalmi keep playoff hopes alive after crushing Sultans by 7 Wicket in one sided contest • 
+                Karachi Kings beat Lahore Qalandars by 4 wickets, Irfan the hero as Kings ace tense 15-over chase • 
+                Quetta Gladiators beat Islamabad United by 2 wickets in a thrilling last-over finish • 
+                Peshawar Zalmi defeat Islamabad United by 6 wickets to keep playoff hopes alive •  
                 PSL confirms final to be held at Gaddafi Stadium on May 18 as scheduled •
                 PSL X trophy 'Luminara' unveiled, adorned with over 22,000 zircon stones •
                 Babar Azam reaches 2000 runs in PSL history, becomes fastest to milestone •
                 Shadab Khan takes 100th PSL wicket, third bowler to achieve feat •
-                BREAKING: Quetta Gladiators beat Islamabad United by 2 wickets in a thrilling last-over finish • 
+                BREAKING: Zalmi keep playoff hopes alive after crushing Sultans by 7 Wicket in one sided contest • 
+                Karachi Kings beat Lahore Qalandars by 4 wickets, Irfan the hero as Kings ace tense 15-over chase •
+                Quetta Gladiators beat Islamabad United by 2 wickets in a thrilling last-over finish • 
                 Peshawar Zalmi defeat Islamabad United by 6 wickets to keep playoff hopes alive • 
-                Karachi Kings crush Multan Sultans by 87 runs to move up in the points table • 
-                Rain washes out crucial match between Lahore Qalandars and Quetta Gladiators • 
                 PSL confirms final to be held at Gaddafi Stadium on May 18 as scheduled •
                 PSL X trophy 'Luminara' unveiled, adorned with over 22,000 zircon stones
               </div>
@@ -716,10 +743,10 @@
       </div>
 
         <div class="match-selector">
-            <label for="match-select">Select Upcoming Match:</label>
-            <select id="match-select">
-                <option value="">-- Select a Match --</option>
-            </select>
+            <h3 style="color: #2B6735; margin-bottom: 15px;">Upcoming Matches</h3>
+            <div id="quick-match-buttons" class="match-buttons">
+                <!-- Upcoming match buttons will be populated here -->
+            </div>
         </div>
 
         <div id="match-details" style="display: none;">
@@ -769,7 +796,7 @@
                                 <td class="factor-label">PSL 2025 Win Percentage</td>
                                 <td id="win-percentage"></td>
                             </tr>
-                            <tr>
+                           <tr>
                                 <td class="factor-label">Performance at Venue</td>
                                 <td id="venue-performance"></td>
                             </tr>
@@ -800,14 +827,6 @@
                             <tr>
                                 <td class="factor-label">Toss Decision Trend</td>
                                 <td id="toss-decision-trend"></td>
-                            </tr>
-                            <tr>
-                                <td class="factor-label">Team 1 at this venue (PSL 2025)</td>
-                                <td id="team1-venue-record"></td>
-                            </tr>
-                            <tr>
-                                <td class="factor-label">Team 2 at this venue (PSL 2025)</td>
-                                <td id="team2-venue-record"></td>
                             </tr>
                         </table>
                     </div>
@@ -864,14 +883,7 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Upcoming Matches Section -->
-        <div class="upcoming-matches">
-            <h2 class="section-title">Upcoming PSL 2025 Matches</h2>
-            <div class="match-list" id="upcoming-matches-list">
-                <!-- Matches will be dynamically populated here -->
-            </div>
-        </div>
+        <!-- Upcoming Matches Section has been moved to the top -->
         
         <!-- Social Media Highlights -->
         <div class="social-highlights">
@@ -884,7 +896,7 @@
                         </div>
                         <div class="post-info">
                             <div class="post-author">PSL Official</div>
-                            <div class="post-date">2 hours ago</div>
+                            <div class="post-date">2 days ago</div>
                         </div>
                     </div>
                     <div class="post-content">
@@ -900,15 +912,15 @@
                 <div class="social-post">
                     <div class="post-header">
                         <div class="post-avatar">
-                            <img src="logo/quetta_gladiators.png" alt="Quetta Gladiators Avatar" />
+                            <img src="logo/peshawar_zalmi.png" alt="peshawar_zalmi Avatar" />
                         </div>
                         <div class="post-info">
-                            <div class="post-author">Quetta Gladiators</div>
+                            <div class="post-author">Peshawar_Zalmi</div>
                             <div class="post-date">5 hours ago</div>
                         </div>
                     </div>
                     <div class="post-content">
-                        What a match, what a finish! Our boys held their nerve in a nail-biting finish against Islamabad United! #PurpleForce #QGvIU #PSL2025
+                        Finish in style — the Zalmi way ⚡ Big hits, big moments, big energy🙌💛 #Zalmi #ZalmiXLegacy #YellowStorm #HBLPSLX #MSvPZ
                     </div>
                     <div class="post-actions">
                         <div class="post-action"><i>❤️</i> 3.8K</div>
@@ -928,7 +940,7 @@
                         </div>
                     </div>
                     <div class="post-content">
-                        Mohammad Rizwan continues to be the standout batsman in #PSLX with 346 runs in 7 innings at an average of 86.50. Phenomenal consistency from the Multan Sultans captain despite his team's struggles. #PSL2025 #CricketStats
+                        Mohammad Rizwan continues to be the standout batsman in #PSLX with 363 runs in 9 innings at an average of 60.50. Phenomenal consistency from the Multan Sultans captain despite his team's struggles. #PSL2025 #CricketStats
                     </div>
                     <div class="post-actions">
                         <div class="post-action"><i>❤️</i> 2.4K</div>
@@ -1055,20 +1067,21 @@
             return upcomingMatches;
         }
 
-        // Function to populate match selector
+        // Function to populate match buttons
         function populateMatchSelector() {
-            const matchSelect = document.getElementById('match-select');
-            matchSelect.innerHTML = '<option value="">-- Select a Match --</option>';
+            const matchButtonsContainer = document.getElementById('quick-match-buttons');
+            matchButtonsContainer.innerHTML = '';
             
             const upcomingMatches = getUpcomingMatches();
+            let count = 0;
+            
             for (const [key, match] of Object.entries(upcomingMatches)) {
+                if (count >= 6) break; // Show only 6 upcoming matches
+                
                 const matchDate = new Date(match.date);
                 const today = new Date();
                 const tomorrow = new Date(today);
                 tomorrow.setDate(tomorrow.getDate() + 1);
-                
-                const option = document.createElement('option');
-                option.value = key;
                 
                 // Format date string
                 const dateStr = matchDate.toLocaleDateString('en-US', { 
@@ -1084,8 +1097,41 @@
                     timeLabel = ' (Tomorrow)';
                 }
                 
-                option.textContent = `${match.team1} vs ${match.team2} - ${dateStr}${timeLabel}`;
-                matchSelect.appendChild(option);
+                const button = document.createElement('button');
+                button.className = 'match-button';
+                button.dataset.matchId = key;
+                
+                // Create team icons
+                const team1Icon = match.team1.includes('TBA') ? 
+                    '' : 
+                    `<img src="logo/${match.team1.toLowerCase().replace(' ', '_')}.png" alt="${match.team1}" class="team-icon">`;
+                
+                const team2Icon = match.team2.includes('TBA') ?
+                    '' :
+                    `<img src="logo/${match.team2.toLowerCase().replace(' ', '_')}.png" alt="${match.team2}" class="team-icon">`;
+                
+                button.innerHTML = `
+                    <div>
+                        <div class="match-button-teams">${team1Icon} ${match.team1} vs ${team2Icon} ${match.team2}</div>
+                        <div class="match-button-details">${dateStr}${timeLabel} • ${match.time} • ${match.venue}</div>
+                    </div>
+                `;
+                
+                button.addEventListener('click', function() {
+                    // Remove 'selected' class from all buttons
+                    document.querySelectorAll('.match-button').forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+                    
+                    // Add 'selected' class to clicked button
+                    this.classList.add('selected');
+                    
+                    // Show match details
+                    showMatchDetails(this.dataset.matchId);
+                });
+                
+                matchButtonsContainer.appendChild(button);
+                count++;
             }
         }
         
@@ -1223,8 +1269,7 @@
             updateAnalysisBreakdown(match);
         }
 
-        function generatePrediction() {
-            const matchId = document.getElementById('match-select').value;
+        function generatePrediction(matchId) {
             const weather = document.getElementById('weather').value;
             
             if (!matchId) {
@@ -1277,12 +1322,12 @@
 
                 const winner = team1Prob > team2Prob ? team1 : team2;
                 const keyPlayers = {
-                    "Islamabad United": ["Shadab Khan", "Alex Hales", "Faheem Ashraf"],
-                    "Lahore Qalandars": ["Shaheen Afridi", "Fakhar Zaman", "Haris Rauf"],
-                    "Karachi Kings": ["Babar Azam", "Imad Wasim", "Mohammad Amir"],
-                    "Quetta Gladiators": ["Mohammad Hasnain", "Jason Roy", "Mohammad Nawaz"],
-                    "Peshawar Zalmi": ["Wahab Riaz", "Shoaib Malik", "Liam Livingstone"],
-                    "Multan Sultans": ["Mohammad Rizwan", "Khushdil Shah", "Shahnawaz Dahani"]
+                    "Islamabad United": ["Shadab Khan(c)", "Naseem Shah", "Colin Munro", "Imad Wasim"],
+                    "Lahore Qalandars": ["Shaheen Afridi(c)", "Fakhar Zaman", "Haris Rauf", "Sam Billings"],
+                    "Karachi Kings": ["David Warner(c)", "Hasan Ali", "James Vince", "Khusdil Shah"],
+                    "Quetta Gladiators": ["Saud Shakeel(c)", "Finn Allen", "Abrar ahmed", "Mohammad Amir",],
+                    "Peshawar Zalmi": ["Babar Azam(c)", "Abdul Samad", "Saim Ayub", "Ali Raza"],
+                    "Multan Sultans": ["Mohammad Rizwan(c)", "Usman Khan", "Josh Little", "Usama Mir"]
                 };
 
                 const keyPlayer = keyPlayers[winner][Math.floor(Math.random() * 3)];
@@ -1309,9 +1354,9 @@
                 const avgScore = (venueData.avgFirstInnings + venueData.avgSecondInnings) / 2;
                 const weatherAdjustment = {
                     'Clear': 0,
-                    'Cloudy': -5,
-                    'Light Rain': -15,
-                    'Hot and Humid': -5
+                    'Cloudy': -7,
+                    'Light Rain': -11,
+                    'Hot and Humid': -3
                 }[weather];
                 
                 const expectedAvg = avgScore + weatherAdjustment;
@@ -1837,8 +1882,6 @@
             document.getElementById('avg-first-innings').innerHTML = `<span style="color: #B27F35;">${venueData.avgFirstInnings} runs</span>`;
             document.getElementById('avg-second-innings').innerHTML = `<span style="color: #B27F35;">${venueData.avgSecondInnings} runs</span>`;
             document.getElementById('toss-decision-trend').innerHTML = `<span style="color: #B27F35;">${venueData.tossDecision}</span>`;
-            document.getElementById('team1-venue-record').innerHTML = `<span style="color: #2B6735;">Check team performance at venue</span>`;
-            document.getElementById('team2-venue-record').innerHTML = `<span style="color: #2B6735;">Check team performance at venue</span>`;
 
             // Update Current Form tab
             document.getElementById('team1-form-title').textContent = `${team1} - Recent Form`;
@@ -1884,13 +1927,17 @@
         // Initialize when page loads
         window.onload = function() {
             populateMatchSelector();
-            populateUpcomingMatches();
             
-            // Add event listeners
-            document.getElementById('match-select').addEventListener('change', function() {
-                showMatchDetails(this.value);
+            // Add event listener for prediction button
+            document.getElementById('predict-btn').addEventListener('click', function() {
+                // Get selected match ID from the selected button
+                const selectedButton = document.querySelector('.match-button.selected');
+                if (selectedButton) {
+                    generatePrediction(selectedButton.dataset.matchId);
+                } else {
+                    alert('Please select a match first!');
+                }
             });
-            document.getElementById('predict-btn').addEventListener('click', generatePrediction);
         };
     </script>
 </body>
