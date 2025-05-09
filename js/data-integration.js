@@ -39,6 +39,11 @@ async function integrateDataIntoApp() {
  * @param {Object} pslData - The fetched PSL data
  */
 function updateApplicationData(pslData) {
+    // Initialize window.pslData if it doesn't exist
+    if (!window.pslData) {
+        window.pslData = {};
+    }
+    
     // Update teams data
     if (pslData.teams) {
         window.pslData.teams = pslData.teams;
